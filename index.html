@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OrigineResell — Scarpe e accessori">
+  <title>OrigineResell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="images/logo-transparent.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===================== NUOVO DROP BANNER ===================== -->
+  <!-- Per aggiornare il testo: modifica solo il contenuto di .drop-banner__text -->
+  <div class="drop-banner" id="drop-banner">
+    <div class="drop-banner__track" aria-label="Nuovo drop disponibile">
+      <span class="drop-banner__text">
+        🔥 NUOVO DROP — Supreme x Nike SB Air Max 2 CB '94 &nbsp;·&nbsp; Disponibile ora &nbsp;·&nbsp;
+        🔥 NUOVO DROP — Supreme x Nike SB Air Max 2 CB '94 &nbsp;·&nbsp; Disponibile ora &nbsp;·&nbsp;
+        🔥 NUOVO DROP — Supreme x Nike SB Air Max 2 CB '94 &nbsp;·&nbsp; Disponibile ora &nbsp;·&nbsp;
+      </span>
+    </div>
+    <button class="drop-banner__close" id="drop-banner-close" aria-label="Chiudi banner">✕</button>
+  </div>
+
+  <!-- ===================== HERO VIDEO ===================== -->
+  <section class="hero" id="home">
+    <video
+      class="hero__video"
+      src="images/hero-video.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      aria-hidden="true">
+    </video>
+
+    <nav class="nav-side" aria-label="Navigazione principale">
+      <!-- OPZIONE A: logo nel nav in alto a sinistra -->
+      <a href="#home" class="nav-side__logo-link" aria-label="OrigineResell home">
+        <img class="nav-side__logo" src="images/logo-transparent.svg" alt="OrigineResell logo">
+      </a>
+      <ul>
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#catalogo">CATALOGO</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contatti">CONTATTI</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero__content">
+      <h1 class="hero__title" data-text="ORIGINERESELL">ORIGINERESELL</h1>
+    </div>
+
+  </section>
+
+  <!-- ===================== COME FUNZIONA ===================== -->
+  <!-- ===================== CATALOGO ===================== -->
+  <section class="catalogo" id="catalogo" aria-labelledby="catalogo-title">
+    <div class="catalogo__header">
+      <h2 class="catalogo__title" id="catalogo-title">Ultimi Arrivi</h2>
+      <p class="catalogo__subtitle">Pezzi selezionati — disponibilità limitata</p>
+    </div>
+    <!-- FILTRI -->
+    <div class="catalogo__filtri" id="catalogo-filtri">
+      <div class="filtri__group">
+        <span class="filtri__label">Brand</span>
+        <div class="filtri__btns">
+          <button class="filtri__btn is-active" data-filter="brand" data-value="tutti">Tutti</button>
+          <button class="filtri__btn" data-filter="brand" data-value="Nike">Nike</button>
+          <button class="filtri__btn" data-filter="brand" data-value="Supreme">Supreme</button>
+          <button class="filtri__btn" data-filter="brand" data-value="Asics">Asics</button>
+        </div>
+      </div>
+      <div class="filtri__group">
+        <span class="filtri__label">Taglia EU</span>
+        <div class="filtri__btns">
+          <button class="filtri__btn is-active" data-filter="size" data-value="tutti">Tutte</button>
+          <button class="filtri__btn" data-filter="size" data-value="42">42</button>
+          <button class="filtri__btn" data-filter="size" data-value="42.5">42.5</button>
+          <button class="filtri__btn" data-filter="size" data-value="43">43</button>
+          <button class="filtri__btn" data-filter="size" data-value="44">44</button>
+          <button class="filtri__btn" data-filter="size" data-value="44.5">44.5</button>
+        </div>
+      </div>
+      <div class="filtri__group">
+        <span class="filtri__label">Stato</span>
+        <div class="filtri__btns">
+          <button class="filtri__btn is-active" data-filter="stato" data-value="tutti">Tutti</button>
+          <button class="filtri__btn" data-filter="stato" data-value="disponibile">Disponibili</button>
+          <button class="filtri__btn" data-filter="stato" data-value="sold">Sold Out</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-grid">
+
+      <figure class="product-card"
+        data-name="Nike Air Max 95 Big Bubble Hong Kong"
+        data-brand="Nike"
+        data-eu-size="43"
+        data-sold="false"
+        data-price="€ 259"
+        data-sizes='["EU 43 / US M 9.5"]'
+        data-images='[
+          "images/nikeairmax95bigbubblehongkong/IMG_7892.jpeg",
+          "images/nikeairmax95bigbubblehongkong/IMG_7895.jpeg",
+          "images/nikeairmax95bigbubblehongkong/IMG_7896.jpeg",
+          "images/nikeairmax95bigbubblehongkong/IMG_7899.jpeg",
+          "images/nikeairmax95bigbubblehongkong/IMG_7922.jpeg"
+        ]'
+        tabindex="0"
+        role="button"
+        aria-label="Vedi Nike Air Max 95 Big Bubble Hong Kong">
+        <span class="product-card__condition product-card__condition--deadstock">DEADSTOCK</span>
+        <img src="images/nikeairmax95bigbubblehongkong/IMG_7896.jpeg" alt="Nike Air Max 95 Big Bubble Hong Kong" loading="lazy">
+        <figcaption class="product-card__info">
+          <span class="product-card__name">Nike Air Max 95 Big Bubble Hong Kong</span>
+          <span class="product-card__size">EU 43 / US M 9.5</span>
+          <span class="product-card__price">€ 259</span>
+        </figcaption>
+      </figure>
+
+      <figure class="product-card"
+        data-name="Nike Air Max 95 x Corteiz Honey Black"
+        data-brand="Nike"
+        data-eu-size="42"
+        data-sold="false"
+        data-price="€ 220"
+        data-sizes='["EU 42 / US 8.5"]'
+        data-images='[
+          "images/nikeairmax95xcorteizhoneyblack/IMG_7722.jpeg",
+          "images/nikeairmax95xcorteizhoneyblack/IMG_7724.jpeg",
+          "images/nikeairmax95xcorteizhoneyblack/IMG_7726.jpeg",
+          "images/nikeairmax95xcorteizhoneyblack/IMG_7727.jpeg"
+        ]'
+        tabindex="0"
+        role="button"
+        aria-label="Vedi Nike Air Max 95 x Corteiz Honey Black">
+        <span class="product-card__condition product-card__condition--deadstock">DEADSTOCK</span>
+        <img src="images/nikeairmax95xcorteizhoneyblack/IMG_7727.jpeg" alt="Nike Air Max 95 x Corteiz Honey Black" loading="lazy">
+        <figcaption class="product-card__info">
+          <span class="product-card__name">Nike Air Max 95 x Corteiz Honey Black</span>
+          <span class="product-card__size">EU 42 / US 8.5</span>
+          <span class="product-card__price">€ 220</span>
+        </figcaption>
+      </figure>
+
+      <figure class="product-card"
+        data-name="Paul Rodriguez Air Zoom Low Habanero Red"
+        data-brand="Nike"
+        data-eu-size="42"
+        data-sold="false"
+        data-price="€ 139"
+        data-sizes='["EU 42 / US 8.5"]'
+        data-sizes-sold='["EU 45 / US 11"]'
+        data-images='[
+          "images/paulrodriguezairzoomlowhabaneroredeteamred/IMG_7909.jpeg",
+          "images/paulrodriguezairzoomlowhabaneroredeteamred/IMG_7910.jpeg",
+          "images/paulrodriguezairzoomlowhabaneroredeteamred/IMG_7915.jpeg",
+          "images/paulrodriguezairzoomlowhabaneroredeteamred/IMG_7919.jpeg"
+        ]'
+        tabindex="0"
+        role="button"
+        aria-label="Vedi Paul Rodriguez Air Zoom Low Habanero Red">
+        <span class="product-card__condition product-card__condition--deadstock">DEADSTOCK</span>
+        <img src="images/paulrodriguezairzoomlowhabaneroredeteamred/IMG_7909.jpeg" alt="Paul Rodriguez Air Zoom Low Habanero Red" loading="lazy">
+        <figcaption class="product-card__info">
+          <span class="product-card__name">Paul Rodriguez Air Zoom Low Habanero Red</span>
+          <span class="product-card__size"><s>EU 45</s> · EU 42 / US 8.5</span>
+          <span class="product-card__price">€ 139</span>
+        </figcaption>
+      </figure>
+
+      <figure class="product-card"
+        data-name="Supreme x Nike SB Air Max 2 CB '94 Black"
+        data-brand="Supreme"
+        data-eu-size="44"
+        data-sold="false"
+        data-price="€ 215"
+        data-sizes='["EU 44 / US 10"]'
+        data-images='[
+          "images/supremenikesbairmax2cb94lowblack/IMG_8800.jpeg",
+          "images/supremenikesbairmax2cb94lowblack/IMG_8802.jpeg",
+          "images/supremenikesbairmax2cb94lowblack/IMG_8803.jpeg",
+          "images/supremenikesbairmax2cb94lowblack/IMG_8804.jpeg",
+          "images/supremenikesbairmax2cb94lowblack/IMG_8808.jpeg"
+        ]'
+        tabindex="0"
+        role="button"
+        aria-label="Vedi Supreme x Nike SB Air Max 2 CB 94 Black">
+        <span class="product-card__condition product-card__condition--deadstock">DEADSTOCK</span>
+        <span class="product-card__new">NEW</span>
+        <img src="images/supremenikesbairmax2cb94lowblack/IMG_8802.jpeg" alt="Supreme x Nike SB Air Max 2 CB '94 Black" loading="lazy">
+        <figcaption class="product-card__info">
+          <span class="product-card__name">Supreme x Nike SB Air Max 2 CB '94 Black</span>
+          <span class="product-card__size">EU 44 / US 10</span>
+          <span class="product-card__price">€ 215</span>
+        </figcaption>
+      </figure>
+
+      <figure class="product-card"
+        data-name="Supreme x Nike SB Air Max 2 CB '94 White"
+        data-brand="Supreme"
+        data-eu-size="44.5"
+        data-sold="false"
+        data-price="€ 205"
+        data-sizes='["EU 44.5 / US 10.5"]'
+        data-images='[
+          "images/supremenikesbairmax2cb94lowwhite/IMG_8811.jpeg",
+          "images/supremenikesbairmax2cb94lowwhite/IMG_8813.jpeg",
+          "images/supremenikesbairmax2cb94lowwhite/IMG_8817.jpeg",
+          "images/supremenikesbairmax2cb94lowwhite/IMG_8819.jpeg",
+          "images/supremenikesbairmax2cb94lowwhite/IMG_8824.jpeg"
+        ]'
+        tabindex="0"
+        role="button"
+        aria-label="Vedi Supreme x Nike SB Air Max 2 CB 94 White">
+        <span class="product-card__condition product-card__condition--deadstock">DEADSTOCK</span>
+        <span class="product-card__new">NEW</span>
+        <img src="images/supremenikesbairmax2cb94lowwhite/IMG_8811.jpeg" alt="Supreme x Nike SB Air Max 2 CB '94 White" loading="lazy">
+        <figcaption class="product-card__info">
+          <span class="product-card__name">Supreme x Nike SB Air Max 2 CB '94 White</span>
+          <span class="product-card__size">EU 44.5 / US 10.5</span>
+          <span class="product-card__price">€ 205</span>
+        </figcaption>
+      </figure>
+
+      <figure class="product-card"
+        data-name="Unaffected x Asics Gel Nimbus 10.1 Grey"
+        data-brand="Asics"
+        data-eu-size="42.5"
+        data-sold="false"
+        data-price="€ 215"
+        data-sizes='["EU 42.5 / US M 9"]'
+        data-images='[
+          "images/unaffectedasicsgelnimbus10_1greysilverblack/IMG_8054.jpeg",
+          "images/unaffectedasicsgelnimbus10_1greysilverblack/IMG_8057.jpeg",
+          "images/unaffectedasicsgelnimbus10_1greysilverblack/IMG_8060.jpeg",
+          "images/unaffectedasicsgelnimbus10_1greysilverblack/IMG_8067.jpeg",
+          "images/unaffectedasicsgelnimbus10_1greysilverblack/IMG_8078.jpeg"
+        ]'
+        tabindex="0"
+        role="button"
+        aria-label="Vedi Unaffected x Asics Gel Nimbus 10.1 Grey">
+        <span class="product-card__condition product-card__condition--deadstock">DEADSTOCK</span>
+        <img src="images/unaffectedasicsgelnimbus10_1greysilverblack/IMG_8054.jpeg" alt="Unaffected x Asics Gel Nimbus 10.1 Grey" loading="lazy">
+        <figcaption class="product-card__info">
+          <span class="product-card__name">Unaffected x Asics Gel Nimbus 10.1 Grey</span>
+          <span class="product-card__size">EU 42.5 / US M 9</span>
+          <span class="product-card__price">€ 215</span>
+        </figcaption>
+      </figure>
+
+      <!-- Aggiungi nuove product-card qui -->
+    </div>
+  </section>
+
+  <!-- ===================== SU RICHIESTA ===================== -->
+  <section class="su-richiesta">
+    <div class="su-richiesta__inner">
+      <p class="su-richiesta__eyebrow">Cerchi qualcosa che non trovi qui?</p>
+      <h2 class="su-richiesta__title">Ordini su richiesta</h2>
+      <p class="su-richiesta__text">
+        Scrivi il modello, la taglia e il tuo budget — trovo io la scarpa giusta per te.
+      </p>
+      <a
+        class="su-richiesta__cta"
+        href="https://wa.me/393938235209?text=Ciao!%20Vorrei%20un%20ordine%20su%20richiesta."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contatta su WhatsApp per un ordine su richiesta"
+      >
+        Scrivici su WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== COME FUNZIONA ===================== -->
+  <section class="come-funziona" id="come-funziona" aria-labelledby="cf-title">
+    <div class="come-funziona__band">
+      <div class="come-funziona__inner">
+      <div class="come-funziona__header" data-animate>
+        <h2 class="come-funziona__title" id="cf-title">Come funziona</h2>
+        <p class="come-funziona__subtitle">Tre passi per ricevere le tue scarpe</p>
+      </div>
+      <ol class="come-funziona__steps">
+        <li class="cf-step" data-animate>
+          <span class="cf-step__num">01</span>
+          <div class="cf-step__body">
+            <svg class="cf-step__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+            </svg>
+            <h3 class="cf-step__title">Scegli la scarpa</h3>
+            <p class="cf-step__text">Sfoglia il catalogo, guarda le foto reali e controlla taglia e prezzo. Trovi solo pezzi selezionati e verificati.</p>
+          </div>
+        </li>
+        <li class="cf-step" data-animate>
+          <span class="cf-step__num">02</span>
+          <div class="cf-step__body">
+            <svg class="cf-step__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+            </svg>
+            <h3 class="cf-step__title">Scrivici su WhatsApp</h3>
+            <p class="cf-step__text">Clicca "Acquista ora" o contattaci direttamente. Confermiamo disponibilità, accordiamo il pagamento e organizziamo la spedizione.</p>
+          </div>
+        </li>
+        <li class="cf-step" data-animate>
+          <span class="cf-step__num">03</span>
+          <div class="cf-step__body">
+            <svg class="cf-step__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12H19M12 5l7 7-7 7"/>
+            </svg>
+            <h3 class="cf-step__title">Ricevi il pacco</h3>
+            <p class="cf-step__text">Imballiamo con cura e spediamo con tracking. Ricevi le tue scarpe comodamente a casa, garantite autentiche.</p>
+          </div>
+        </li>
+      </ol>
+      </div><!-- /come-funziona__inner -->
+    </div><!-- /come-funziona__band -->
+  </section>
+
+  <!-- ===================== AUTENTICITÀ ===================== -->
+  <section class="autenticita" aria-labelledby="autenticita-title">
+    <h2 class="sr-only" id="autenticita-title">Garanzie</h2>
+    <div class="autenticita__inner">
+      <div class="autenticita__item">
+        <svg class="autenticita__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <strong class="autenticita__label">100% Autentico</strong>
+        <span class="autenticita__desc">Nessuna replica. Mai.</span>
+      </div>
+      <div class="autenticita__item">
+        <svg class="autenticita__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <strong class="autenticita__label">Foto reali</strong>
+        <span class="autenticita__desc">Ogni scarpa fotografata di persona.</span>
+      </div>
+      <div class="autenticita__item">
+        <svg class="autenticita__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <strong class="autenticita__label">Spedizione sicura</strong>
+        <span class="autenticita__desc">Imballaggio curato, tracking incluso.</span>
+      </div>
+      <div class="autenticita__item">
+        <svg class="autenticita__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <strong class="autenticita__label">Assistenza diretta</strong>
+        <span class="autenticita__desc">Rispondiamo su WhatsApp e Instagram.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SOCIAL FEED ===================== -->
+  <section class="social-feed">
+    <h2 class="social-feed__title">Quello che vedi sui social</h2>
+    <div class="ig-feed__header" data-animate>
+      <h3 class="ig-feed__title">
+        <svg class="ig-feed__logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+        </svg>
+        @origine.resell
+      </h3>
+      <a class="ig-feed__follow" href="https://www.tiktok.com/@origine.resell" target="_blank" rel="noopener noreferrer">Seguici</a>
+    </div>
+    <div class="social-feed__grid">
+
+      <a class="social-feed__item" href="https://www.tiktok.com/@origine.resell" target="_blank" rel="noopener noreferrer" aria-label="Guarda su TikTok">
+        <video src="images/Videotiktok1.mp4" autoplay muted loop playsinline preload="auto"></video>
+      </a>
+
+      <a class="social-feed__item" href="https://www.tiktok.com/@origine.resell" target="_blank" rel="noopener noreferrer" aria-label="Guarda su TikTok">
+        <video src="images/Videotiktok2.mp4" autoplay muted loop playsinline preload="auto"></video>
+      </a>
+
+      <a class="social-feed__item" href="https://www.tiktok.com/@origine.resell" target="_blank" rel="noopener noreferrer" aria-label="Guarda su TikTok">
+        <video src="images/Videotiktok3.mp4" autoplay muted loop playsinline preload="auto"></video>
+      </a>
+
+      <a class="social-feed__item" href="https://www.tiktok.com/@origine.resell" target="_blank" rel="noopener noreferrer" aria-label="Guarda su TikTok">
+        <video src="images/Videotiktok4.mp4" autoplay muted loop playsinline preload="auto"></video>
+      </a>
+
+      <a class="social-feed__item" href="https://www.tiktok.com/@origine.resell" target="_blank" rel="noopener noreferrer" aria-label="Guarda su TikTok">
+        <video src="images/Videotiktok5.mp4" autoplay muted loop playsinline preload="auto"></video>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ===================== RECENSIONI ===================== -->
+  <section class="recensioni" id="recensioni" aria-labelledby="recensioni-title">
+    <div class="recensioni__inner">
+
+      <div class="recensioni__header" data-animate>
+        <h2 class="recensioni__title" id="recensioni-title">Cosa dicono di noi</h2>
+        <p class="recensioni__subtitle">Recensioni verificate su Trustpilot</p>
+      </div>
+
+      <!-- Trustpilot widget -->
+      <div class="trustpilot-box" data-animate>
+        <div class="trustpilot-box__top">
+          <svg class="trustpilot-box__logo" viewBox="0 0 126 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Trustpilot" role="img">
+            <path d="M18.8 0l4.6 14.1H38l-11.8 8.6 4.5 14L18.8 28l-11.9 8.7 4.5-14L-.4 14.1H14.2L18.8 0z" fill="#00B67A"/>
+            <path d="M27 24.3l-1-3.1-7.2 5.2L27 24.3z" fill="#005128"/>
+            <text x="44" y="24" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">Trustpilot</text>
+          </svg>
+          <div class="trustpilot-box__score">
+            <span class="trustpilot-box__stars">★★★★★</span>
+            <span class="trustpilot-box__label">Eccellente</span>
+          </div>
+        </div>
+        <p class="trustpilot-box__desc">Leggi le recensioni verificate dei nostri clienti su Trustpilot.</p>
+        <a class="trustpilot-box__btn" href="https://www.trustpilot.com" target="_blank" rel="noopener noreferrer">
+          Lascia una recensione
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="faq__inner">
+      <div class="faq__header" data-animate>
+        <h2 class="faq__title" id="faq-title">Domande frequenti</h2>
+        <p class="faq__subtitle">Tutto quello che vuoi sapere prima di acquistare</p>
+      </div>
+      <dl class="faq__list">
+
+        <div class="faq__item" data-animate>
+          <dt class="faq__question">
+            <button class="faq__btn" aria-expanded="false">
+              Quanto costa la spedizione?
+              <svg class="faq__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </dt>
+          <dd class="faq__answer" hidden>
+            La spedizione è a carico dell'acquirente e varia in base al corriere scelto. Ti comunichiamo il costo esatto su WhatsApp prima di confermare l'ordine. Per ordini di importo elevato valutiamo la spedizione gratuita.
+          </dd>
+        </div>
+
+        <div class="faq__item" data-animate>
+          <dt class="faq__question">
+            <button class="faq__btn" aria-expanded="false">
+              Come vengono spedite le scarpe?
+              <svg class="faq__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </dt>
+          <dd class="faq__answer" hidden>
+            Spediamo con corrieri tracciabili (BRT, GLS o SDA). Imballiamo ogni paio con attenzione per garantire che arrivi in perfette condizioni. Riceverai il codice tracking non appena il pacco è in mano al corriere.
+          </dd>
+        </div>
+
+        <div class="faq__item" data-animate>
+          <dt class="faq__question">
+            <button class="faq__btn" aria-expanded="false">
+              Come garantite l'autenticità?
+              <svg class="faq__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </dt>
+          <dd class="faq__answer" hidden>
+            Ogni paio viene acquistato da fonti certificate o da rivenditori verificati. Prima di metterlo in vendita controlliamo personalmente cuciture, etichette, suole e scatola originale. Le foto che vedi nel catalogo sono sempre reali e mostrano il paio esatto che riceverai.
+          </dd>
+        </div>
+
+        <div class="faq__item" data-animate>
+          <dt class="faq__question">
+            <button class="faq__btn" aria-expanded="false">
+              Quali metodi di pagamento accettate?
+              <svg class="faq__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </dt>
+          <dd class="faq__answer" hidden>
+            Accettiamo PayPal (con protezione acquirente), bonifico bancario e Satispay. Il pagamento avviene prima della spedizione. Concordiamo tutto su WhatsApp in modo semplice e trasparente.
+          </dd>
+        </div>
+
+        <div class="faq__item" data-animate>
+          <dt class="faq__question">
+            <button class="faq__btn" aria-expanded="false">
+              Posso acquistare una scarpa su richiesta?
+              <svg class="faq__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </dt>
+          <dd class="faq__answer" hidden>
+            Sì! Se cerchi un modello o una taglia che non trovi nel catalogo, scrivici su WhatsApp. Attiviamo la ricerca e ti facciamo sapere appena troviamo il pezzo giusto al prezzo che ti aspetti.
+          </dd>
+        </div>
+
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===================== SFONDO ===================== -->
+  <section class="sfondo" aria-hidden="true"></section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="contatti">
+    <div class="footer__social">
+      <a href="https://www.instagram.com/origineresell/" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://www.tiktok.com/@origine.resell" class="social-link" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+        </svg>
+      </a>
+      <a href="https://wa.me/393938235209" class="social-link" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+        </svg>
+      </a>
+      <a href="https://www.vinted.it/member/126961737-origineresell" class="social-link" aria-label="Vinted" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3 3h4.5l3.5 9.5L14.5 3H19l-6 18h-4L3 3z"/>
+        </svg>
+      </a>
+    </div>
+    <p class="footer__copy">&copy; 2026 OrigineResell. All rights reserved.</p>
+  </footer>
+
+  <!-- ===================== LIGHTBOX ===================== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galleria prodotto" hidden>
+    <button class="lightbox__close" aria-label="Chiudi galleria">&#10005;</button>
+
+    <div class="lightbox__inner">
+      <button class="lightbox__arrow lightbox__arrow--prev" aria-label="Foto precedente">&#8592;</button>
+
+      <div class="lightbox__img-wrap">
+        <img class="lightbox__img" src="" alt="">
+      </div>
+
+      <button class="lightbox__arrow lightbox__arrow--next" aria-label="Foto successiva">&#8594;</button>
+    </div>
+
+    <div class="lightbox__footer">
+      <p class="lightbox__name"></p>
+      <div class="lightbox__dots" aria-hidden="true"></div>
+      <div class="lightbox__sizes-row">
+        <div class="lightbox__sizes" id="lb-sizes" aria-label="Seleziona taglia"></div>
+        <button class="lb-size-guide-btn" id="lb-size-guide-btn" type="button" aria-label="Apri guida taglie">Guida taglie</button>
+      </div>
+      <p class="lb-availability" id="lb-availability"></p>
+      <div class="lightbox__actions">
+        <button class="lb-btn lb-btn--cart" id="lb-add-cart">+ Carrello</button>
+        <button class="lb-btn lb-btn--buy" id="lb-buy-now">Acquista ora</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== WHATSAPP FLOTTANTE ===================== -->
+  <a class="wa-float" href="https://wa.me/393938235209" target="_blank" rel="noopener noreferrer" aria-label="Contattaci su WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+    </svg>
+    <span class="wa-float__label">Scrivici</span>
+  </a>
+
+  <!-- ===================== CART BUTTON ===================== -->
+  <button class="cart-btn" id="cart-btn" aria-label="Apri carrello">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="9" cy="21" r="1"/>
+      <circle cx="20" cy="21" r="1"/>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 2h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+    </svg>
+    <span class="cart-badge" id="cart-badge" hidden>0</span>
+  </button>
+
+  <!-- ===================== CART PANEL ===================== -->
+  <div class="cart-panel" id="cart-panel" aria-label="Carrello" role="dialog">
+    <div class="cart-panel__header">
+      <h2 class="cart-panel__title">Carrello</h2>
+      <button class="cart-panel__close" id="cart-close" aria-label="Chiudi carrello">&#10005;</button>
+    </div>
+    <ul class="cart-panel__list" id="cart-list"></ul>
+    <div class="cart-panel__footer">
+      <div class="cart-panel__total">Totale <span id="cart-total">€ 0</span></div>
+      <button class="cart-panel__checkout" id="cart-checkout" disabled>
+        Ordina su WhatsApp
+      </button>
+    </div>
+  </div>
+  <div class="cart-overlay" id="cart-overlay"></div>
+
+  <!-- ===================== SIZE GUIDE MODAL ===================== -->
+  <div class="size-guide" id="size-guide" role="dialog" aria-modal="true" aria-label="Guida alle taglie" hidden>
+    <div class="size-guide__inner">
+      <button class="size-guide__close" id="size-guide-close" aria-label="Chiudi guida taglie">&#10005;</button>
+      <h3 class="size-guide__title">Guida alle Taglie</h3>
+      <p class="size-guide__note">Conversione taglie uomo — taglia in dubbio? Vai sempre su.</p>
+      <table class="size-guide__table">
+        <thead>
+          <tr><th>EU</th><th>US (M)</th><th>UK</th><th>CM</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>38</td><td>5.5</td><td>4.5</td><td>24</td></tr>
+          <tr><td>38.5</td><td>6</td><td>5</td><td>24.5</td></tr>
+          <tr><td>39</td><td>6.5</td><td>5.5</td><td>25</td></tr>
+          <tr><td>40</td><td>7</td><td>6</td><td>25.5</td></tr>
+          <tr><td>40.5</td><td>7.5</td><td>6.5</td><td>26</td></tr>
+          <tr><td>41</td><td>8</td><td>7</td><td>26.5</td></tr>
+          <tr><td>42</td><td>8.5</td><td>7.5</td><td>27</td></tr>
+          <tr><td>42.5</td><td>9</td><td>8</td><td>27.5</td></tr>
+          <tr><td>43</td><td>9.5</td><td>8.5</td><td>28</td></tr>
+          <tr><td>44</td><td>10</td><td>9</td><td>28.5</td></tr>
+          <tr><td>44.5</td><td>10.5</td><td>9.5</td><td>29</td></tr>
+          <tr><td>45</td><td>11</td><td>10</td><td>29.5</td></tr>
+          <tr><td>45.5</td><td>11.5</td><td>10.5</td><td>30</td></tr>
+          <tr><td>46</td><td>12</td><td>11</td><td>30.5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== ADMIN PANEL ===================== -->
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
