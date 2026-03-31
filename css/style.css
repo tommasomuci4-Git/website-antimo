@@ -719,89 +719,6 @@ figure {
   background: transparent;   /* il graffiti del body fa da sfondo */
 }
 
-/* =============================================
-   CHIUSURA — VIDEO/FOTO FINALE + SOCIAL
-   ============================================= */
-.chiusura {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;   /* mostra il graffiti */
-}
-
-.chiusura__media {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-
-/* Overlay attivo solo quando c'è un video caricato */
-.chiusura__media[src]:not([src=""]) ~ * {
-  z-index: 2;
-}
-
-.chiusura__overlay {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-}
-
-.chiusura__brand {
-  font-family: var(--font-heading-family);
-  font-weight: var(--font-heading-weight);
-  font-size: clamp(2.5rem, 9vw, 7rem);
-  color: var(--color-white);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  position: relative;
-  animation: brandFadeIn 1.6s ease forwards;
-  text-shadow: 0 0 40px rgba(0, 82, 255, 0.55), 0 0 80px rgba(107, 155, 255, 0.25);
-}
-
-/* Glitch sulla scritta ORIGINERESELL — uguale al titolo hero */
-.chiusura__brand::before,
-.chiusura__brand::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  opacity: 0.75;
-}
-
-.chiusura__brand::before {
-  color: var(--color-accent);
-  clip-path: polygon(0 25%, 100% 25%, 100% 50%, 0 50%);
-  animation: glitch1 2s infinite linear;
-}
-
-.chiusura__brand::after {
-  color: var(--color-accent-mid);
-  clip-path: polygon(0 62%, 100% 62%, 100% 82%, 0 82%);
-  animation: glitch2 2s infinite linear;
-}
-
-@keyframes brandFadeIn {
-  from { opacity: 0; letter-spacing: 0.12em; }
-  to   { opacity: 1; letter-spacing: 0.04em; }
-}
-
-/* SOCIAL ICONS */
-.chiusura__social {
-  position: absolute;
-  bottom: var(--spacing-md);
-  right: var(--spacing-md);
-  z-index: 3;
-  display: flex;
-  flex-direction: row;
-  gap: 1.2rem;
-  align-items: center;
-}
 
 .social-link {
   display: flex;
@@ -1180,197 +1097,6 @@ figure {
   color: var(--color-white);
 }
 
-/* =============================================
-   ADMIN PANEL
-   ============================================= */
-.admin-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 9000;
-}
-
-.admin-overlay--visible {
-  display: block;
-}
-
-.admin-panel {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(420px, 92vw);
-  background: #0d0d0d;
-  border: 1px solid rgba(0, 82, 255, 0.35);
-  border-radius: 10px;
-  z-index: 9100;
-  padding: 1.5rem;
-}
-
-.admin-panel__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.4rem;
-}
-
-.admin-panel__title {
-  font-family: var(--font-heading-family);
-  font-size: 1.1rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.admin-panel__close {
-  background: transparent;
-  border: none;
-  color: rgba(255,255,255,0.5);
-  font-size: 1.1rem;
-  cursor: pointer;
-  padding: 0.2rem 0.4rem;
-  transition: color 0.2s;
-}
-
-.admin-panel__close:hover { color: #fff; }
-
-/* Login */
-.admin-login {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-
-.admin-login__label {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.45);
-  letter-spacing: 0.06em;
-}
-
-.admin-login__input {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 6px;
-  color: #fff;
-  padding: 0.6rem 0.9rem;
-  font-size: 0.9rem;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.admin-login__input:focus {
-  border-color: var(--color-accent);
-}
-
-.admin-login__btn {
-  background: var(--color-accent);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.6rem;
-  font-family: var(--font-heading-family);
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.admin-login__btn:hover { opacity: 0.85; }
-
-.admin-login__error {
-  font-size: 0.75rem;
-  color: #ff4d4d;
-  text-align: center;
-}
-
-/* Products list */
-.admin-products__hint {
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.35);
-  letter-spacing: 0.05em;
-  margin-bottom: 1rem;
-}
-
-.admin-products__list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  max-height: 280px;
-  overflow-y: auto;
-  padding-right: 0.3rem;
-  margin-bottom: 1.2rem;
-}
-
-.admin-product-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem;
-  padding: 0.55rem 0.7rem;
-  background: rgba(255,255,255,0.04);
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.07);
-}
-
-.admin-product-item__name {
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.75);
-  flex: 1;
-  line-height: 1.3;
-}
-
-.admin-toggle {
-  flex-shrink: 0;
-  width: 44px;
-  height: 24px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  background: rgba(255,255,255,0.12);
-  position: relative;
-  transition: background 0.25s;
-}
-
-.admin-toggle::after {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #fff;
-  transition: transform 0.25s;
-}
-
-.admin-toggle--sold {
-  background: #ff4d4d;
-}
-
-.admin-toggle--sold::after {
-  transform: translateX(20px);
-}
-
-.admin-reset-btn {
-  width: 100%;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.45);
-  border-radius: 6px;
-  padding: 0.5rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
-}
-
-.admin-reset-btn:hover {
-  border-color: #ff4d4d;
-  color: #ff4d4d;
-}
 
 /* =============================================
    WHATSAPP FLOTTANTE
@@ -1724,8 +1450,7 @@ figure {
    FIX VIEWPORT MOBILE (iOS address bar)
    ============================================= */
 @supports (height: 100svh) {
-  .hero,
-  .chiusura {
+  .hero {
     height: 100svh;
   }
 }
@@ -1763,15 +1488,6 @@ figure {
 
   .sfondo {
     height: 20vh;
-  }
-
-  .chiusura {
-    height: 70svh;
-    height: 70vh;
-  }
-
-  .chiusura__social {
-    gap: 1.2rem;
   }
 
   .lightbox {
@@ -1828,16 +1544,6 @@ figure {
   .hero__title {
     font-size: clamp(0.6rem, 3.5vw, 0.9rem);
     letter-spacing: 0.25em;
-  }
-
-  .chiusura__brand {
-    font-size: clamp(1.8rem, 10vw, 3.5rem);
-  }
-
-  .chiusura__social {
-    bottom: var(--spacing-sm);
-    right: var(--spacing-sm);
-    gap: 1rem;
   }
 
   .social-link {
@@ -2525,13 +2231,13 @@ figure {
 /* =============================================
    INSTAGRAM FEED
    ============================================= */
-.ig-feed {
+.feed {
   padding: 4rem 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.ig-feed__header {
+.feed__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2543,7 +2249,7 @@ figure {
   padding: 0 var(--spacing-md);
 }
 
-.ig-feed__title {
+.feed__title {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -2554,13 +2260,13 @@ figure {
   text-transform: uppercase;
 }
 
-.ig-feed__logo {
+.feed__logo {
   width: 22px;
   height: 22px;
   flex-shrink: 0;
 }
 
-.ig-feed__follow {
+.feed__follow {
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -2573,23 +2279,23 @@ figure {
   white-space: nowrap;
 }
 
-.ig-feed__follow:hover {
+.feed__follow:hover {
   border-color: rgba(255,255,255,0.6);
   color: #fff;
 }
 
-.ig-feed__preview {
+.feed__preview {
   display: block;
   overflow: hidden;
   border-radius: 6px;
   transition: opacity 0.3s;
 }
 
-.ig-feed__preview:hover {
+.feed__preview:hover {
   opacity: 0.85;
 }
 
-.ig-feed__preview img {
+.feed__preview img {
   width: 100%;
   height: auto;
   object-fit: contain;
@@ -2666,7 +2372,7 @@ figure {
     margin: 0 auto;
   }
 
-  .ig-feed__header {
+  .feed__header {
     flex-direction: column;
     align-items: center;
     gap: 0.6rem;

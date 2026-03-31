@@ -238,8 +238,8 @@ const animSelectors = [
   '.recensioni__header',
   '.rec-card',
   '.recensioni__form-wrap',
-  '.ig-feed__header',
-  '.ig-feed__item',
+  '.feed__header',
+  '.feed__item',
   '.faq__header',
   '.faq__item',
   '.chiusura__brand'
