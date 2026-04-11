@@ -60,11 +60,11 @@ function openLightbox(card) {
   };
 
   lbName.textContent = card.dataset.name;
-  lbAddCart.textContent = '+ Carrello';
+  lbAddCart.textContent = '+ Cart';
 
   const isSold = card.dataset.sold === 'true';
   if (lbAvailability) {
-    lbAvailability.textContent = isSold ? 'Sold Out' : '1 paio disponibile';
+    lbAvailability.textContent = isSold ? 'Sold Out' : '1 pair available';
     lbAvailability.style.color = isSold ? '#888' : '#4caf50';
   }
 
@@ -104,7 +104,7 @@ function selectSize(size) {
   currentProduct.size = size;
   const alreadyInCart = isInCart(currentProduct.name);
   lbAddCart.disabled  = alreadyInCart;
-  lbAddCart.textContent = alreadyInCart ? '✓ Già nel carrello' : '+ Carrello';
+  lbAddCart.textContent = alreadyInCart ? '✓ Already in cart' : '+ Cart';
   lbBuyNow.disabled   = false;
   lbSizes.querySelectorAll('.lb-size-btn').forEach(btn => {
     btn.classList.toggle('lb-size-btn--selected', btn.textContent === size);
@@ -206,10 +206,10 @@ function updateAvailability() {
       avail.textContent = '';
       avail.classList.remove('product-card__availability--sold');
     } else if (isInCart(card.dataset.name)) {
-      avail.textContent = 'Prenotato';
+      avail.textContent = 'Reserved';
       avail.classList.add('product-card__availability--sold');
     } else {
-      avail.textContent = '1 paio disponibile';
+      avail.textContent = '1 pair available';
       avail.classList.remove('product-card__availability--sold');
     }
   });
@@ -370,7 +370,7 @@ function removeFromCart(index) {
   // Se il lightbox è aperto sullo stesso prodotto, riabilita il bottone
   if (!lightbox.hidden && currentProduct.name === removed.name) {
     lbAddCart.disabled = false;
-    lbAddCart.textContent = '+ Carrello';
+    lbAddCart.textContent = '+ Cart';
   }
 }
 
@@ -398,7 +398,7 @@ function updateCartUI() {
         <span class="cart-item__size">${item.size}</span>
         <span class="cart-item__price">${item.price}</span>
       </div>
-      <button class="cart-item__remove" aria-label="Rimuovi dal carrello">&#10005;</button>
+      <button class="cart-item__remove" aria-label="Remove from cart">&#10005;</button>
     `;
     li.querySelector('.cart-item__remove').addEventListener('click', () => removeFromCart(i));
     cartList.appendChild(li);
@@ -410,12 +410,12 @@ function updateCartUI() {
 }
 
 function buildWhatsAppMessage() {
-  let msg = 'Ciao! Vorrei acquistare:\n\n';
+  let msg = 'Hi! I would like to buy:\n\n';
   cart.forEach(item => {
-    msg += `• ${item.name}\n  Taglia: ${item.size}\n  Prezzo: ${item.price}\n\n`;
+    msg += `• ${item.name}\n  Size: ${item.size}\n  Price: ${item.price}\n\n`;
   });
   const total = calcTotal();
-  msg += `Totale: € ${total.toLocaleString('it-IT')}`;
+  msg += `Total: € ${total.toLocaleString('en-US')}`;
   return encodeURIComponent(msg);
 }
 
@@ -423,7 +423,7 @@ function buildWhatsAppMessage() {
 lbAddCart.addEventListener('click', () => {
   if (isInCart(currentProduct.name)) return;
   addToCart(currentProduct);
-  lbAddCart.textContent = '✓ Già nel carrello';
+  lbAddCart.textContent = '✓ Already in cart';
   lbAddCart.disabled = true;
 });
 
@@ -432,7 +432,7 @@ lbAddCart.addEventListener('click', () => {
 lbBuyNow.addEventListener('click', () => {
   closeLightbox();
   const msg = encodeURIComponent(
-    `Ciao! Sono interessato a:\n\n• ${currentProduct.name}\n  Taglia: ${currentProduct.size}\n  Prezzo: ${currentProduct.price}`
+    `Hi! I'm interested in:\n\n• ${currentProduct.name}\n  Size: ${currentProduct.size}\n  Price: ${currentProduct.price}`
   );
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank', 'noopener');
 });

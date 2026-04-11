@@ -1279,7 +1279,7 @@ figure {
 }
 
 .cart-panel__list:empty::after {
-  content: 'Il carrello è vuoto.';
+  content: 'Your cart is empty.';
   display: block;
   text-align: center;
   font-family: var(--font-body-family);
