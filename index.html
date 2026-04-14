@@ -47,7 +47,6 @@
         <img class="nav-side__logo" src="images/logo-transparent.svg" alt="OrigineResell logo">
       </a>
       <ul>
-        <li><a href="#home">HOME</a></li>
         <li><a href="#catalogo">CATALOG</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contatti">CONTACT</a></li>
@@ -345,6 +344,13 @@
 
       <!-- Aggiungi nuove product-card qui -->
     </div>
+
+    <div class="catalog-show-more" id="catalog-show-more">
+      <button class="catalog-show-more__btn" id="catalog-show-more-btn" aria-expanded="false">
+        See more
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+    </div>
   </section>
 
   <!-- ===================== SU RICHIESTA ===================== -->
@@ -629,12 +635,11 @@
 
   <!-- ===================== LIGHTBOX ===================== -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Product gallery" hidden>
-    <button class="lightbox__close" aria-label="Close gallery">&#10005;</button>
-
     <div class="lightbox__inner">
       <button class="lightbox__arrow lightbox__arrow--prev" aria-label="Previous photo">&#8592;</button>
 
       <div class="lightbox__img-wrap">
+        <button class="lightbox__close" aria-label="Close gallery">&#10005;</button>
         <img class="lightbox__img" src="" alt="">
       </div>
 
@@ -643,6 +648,7 @@
 
     <div class="lightbox__footer">
       <p class="lightbox__name"></p>
+      <p class="lightbox__price" id="lb-price"></p>
       <div class="lightbox__dots" aria-hidden="true"></div>
       <div class="lightbox__sizes-row">
         <div class="lightbox__sizes" id="lb-sizes" aria-label="Select size"></div>
@@ -720,7 +726,9 @@
     </div>
   </div>
 
-  <!-- ===================== ADMIN PANEL ===================== -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
 
   <script src="js/main.js" defer></script>
 </body>

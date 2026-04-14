@@ -14,6 +14,41 @@ dropBannerClose.addEventListener('click', () => {
 });
 
 // =============================================
+//  BACK TO TOP
+// =============================================
+const backToTopBtn = document.getElementById('back-to-top');
+
+window.addEventListener('scroll', () => {
+  backToTopBtn.classList.toggle('is-visible', window.scrollY > 300);
+}, { passive: true });
+
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// =============================================
+//  CATALOG — SEE MORE (mobile only)
+// =============================================
+const catalogGrid = document.querySelector('.product-grid');
+const showMoreBtn = document.getElementById('catalog-show-more-btn');
+const showMoreWrap = document.getElementById('catalog-show-more');
+
+if (showMoreBtn && catalogGrid) {
+  showMoreBtn.addEventListener('click', () => {
+    const expanded = catalogGrid.classList.toggle('is-expanded');
+    showMoreBtn.setAttribute('aria-expanded', expanded);
+    showMoreBtn.querySelector('svg').style.transform = expanded ? 'rotate(180deg)' : '';
+    showMoreBtn.childNodes[0].textContent = expanded ? 'See less ' : 'See more ';
+    if (expanded) {
+      const fifthCard = catalogGrid.querySelector('.product-card:nth-child(5)');
+      if (fifthCard) fifthCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+}
+
+// =============================================
 //  SMOOTH SCROLL
 // =============================================
 document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -32,6 +67,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 const lightbox  = document.getElementById('lightbox');
 const lbImg     = lightbox.querySelector('.lightbox__img');
 const lbName    = lightbox.querySelector('.lightbox__name');
+const lbPrice   = document.getElementById('lb-price');
 const lbDots    = lightbox.querySelector('.lightbox__dots');
 const lbPrev    = lightbox.querySelector('.lightbox__arrow--prev');
 const lbNext    = lightbox.querySelector('.lightbox__arrow--next');
@@ -59,7 +95,8 @@ function openLightbox(card) {
     image: images[0]
   };
 
-  lbName.textContent = card.dataset.name;
+  lbName.textContent  = card.dataset.name;
+  lbPrice.textContent = card.dataset.price;
   lbAddCart.textContent = '+ Cart';
 
   const isSold = card.dataset.sold === 'true';
