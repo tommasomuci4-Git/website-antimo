@@ -355,7 +355,7 @@ document.addEventListener('keydown', e => {
 // =============================================
 //  CARRELLO
 // =============================================
-const WHATSAPP_NUMBER = '393938235209';
+const WHATSAPP_NUMBER = '393520769859';
 
 let cart = JSON.parse(localStorage.getItem('origineresell_cart') || '[]');
 
