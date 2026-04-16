@@ -270,9 +270,6 @@ function updateAvailability() {
     if (card.dataset.sold === 'true') {
       avail.textContent = 'Sold out';
       avail.classList.add('product-card__availability--sold');
-    } else if (isInCart(card.dataset.name)) {
-      avail.textContent = 'Reserved';
-      avail.classList.add('product-card__availability--sold');
     } else {
       avail.textContent = '1 pair available';
       avail.classList.remove('product-card__availability--sold');
