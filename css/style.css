@@ -2496,8 +2496,8 @@ figure {
    ============================================= */
 .back-to-top {
   position: fixed;
-  bottom: 28px;
-  right: 20px;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
   z-index: 900;
   width: 44px;
   height: 44px;
