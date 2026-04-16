@@ -334,9 +334,11 @@ function renderProductCard(product) {
   const cond = (product.condition || '').toUpperCase();
   const condClass = cond === 'DEADSTOCK' ? ' product-card__condition--deadstock' : '';
   const condBadge = cond ? `<span class="product-card__condition${condClass}">${cond}</span>` : '';
+  const newBadge = product.is_new ? `<span class="product-card__new">NEW</span>` : '';
 
   card.innerHTML = `
     ${condBadge}
+    ${newBadge}
     <img src="${firstImage}" alt="${product.name || ''}" loading="lazy">
     <figcaption class="product-card__info">
       <span class="product-card__name">${product.name || ''}</span>

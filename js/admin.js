@@ -116,6 +116,11 @@ function renderAdminProduct(product) {
     </div>
     <div class="admin-product__actions">
       <label class="sold-toggle">
+        <input type="checkbox" class="new-checkbox" ${product.is_new ? 'checked' : ''}>
+        <span class="toggle-track new-track"><span class="toggle-thumb"></span></span>
+        <span class="toggle-label new-label">${product.is_new ? 'NEW' : 'Standard'}</span>
+      </label>
+      <label class="sold-toggle">
         <input type="checkbox" class="sold-checkbox" ${product.sold ? 'checked' : ''}>
         <span class="toggle-track"><span class="toggle-thumb"></span></span>
         <span class="toggle-label">${product.sold ? 'SOLD' : 'Available'}</span>
@@ -123,6 +128,29 @@ function renderAdminProduct(product) {
       <button class="btn btn--danger btn-delete" style="padding:0.45rem 0.9rem;font-size:0.75rem;">Delete</button>
     </div>
   `;
+
+  const newCheckbox  = div.querySelector('.new-checkbox');
+  const newLabel     = div.querySelector('.new-label');
+  const newTrack     = div.querySelector('.new-track');
+
+  newCheckbox.addEventListener('change', async () => {
+    const val = newCheckbox.checked;
+    newLabel.textContent = val ? 'NEW' : 'Standard';
+    newTrack.style.background = val ? '#0052ff' : '';
+
+    const { error } = await db
+      .from('products')
+      .update({ is_new: val })
+      .eq('id', product.id);
+
+    if (error) {
+      console.error(error);
+      newCheckbox.checked = !val;
+      newLabel.textContent = !val ? 'NEW' : 'Standard';
+      newTrack.style.background = !val ? '#0052ff' : '';
+      alert('Error updating product.');
+    }
+  });
 
   const checkbox    = div.querySelector('.sold-checkbox');
   const toggleLabel = div.querySelector('.toggle-label');
@@ -226,6 +254,7 @@ productForm.addEventListener('submit', async (e) => {
   const condition = document.getElementById('prod-condition').value;
   const category  = document.getElementById('prod-category').value.trim();
   const desc      = document.getElementById('prod-desc').value.trim();
+  const isNew     = document.getElementById('prod-is-new').checked;
   const files     = imageInput.files;
 
   if (files.length === 0) {
@@ -275,7 +304,8 @@ productForm.addEventListener('submit', async (e) => {
       category,
       description: desc,
       images: imageUrls,
-      sold: false
+      sold: false,
+      is_new: isNew
     });
 
     if (insertError) throw insertError;
