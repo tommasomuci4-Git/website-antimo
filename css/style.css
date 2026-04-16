@@ -461,6 +461,11 @@ figure {
   text-align: center;
   gap: 0.3rem;
   padding: 1rem 0.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.autenticita__item:last-child {
+  border-right: none;
 }
 
 .autenticita__icon {
@@ -703,6 +708,28 @@ figure {
 [data-animate].is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Animazioni variate per sezione */
+.faq__item[data-animate],
+.come-funziona__header[data-animate],
+.catalogo__header[data-animate] {
+  transform: translateX(-28px);
+}
+
+.rec-card[data-animate]:nth-child(even),
+.feed__item[data-animate]:nth-child(even),
+.autenticita__item[data-animate]:nth-child(even) {
+  transform: translateX(28px);
+}
+
+.faq__item[data-animate].is-visible,
+.come-funziona__header[data-animate].is-visible,
+.catalogo__header[data-animate].is-visible,
+.rec-card[data-animate].is-visible,
+.feed__item[data-animate].is-visible,
+.autenticita__item[data-animate].is-visible {
+  transform: translateX(0);
 }
 
 /* =============================================
@@ -1492,7 +1519,7 @@ figure {
 .footer__copy {
   font-size: 0.6rem;
   letter-spacing: 0.14em;
-  opacity: 0.3;
+  opacity: 0.55;
   text-transform: uppercase;
 }
 
@@ -2346,22 +2373,26 @@ figure {
 }
 
 .su-richiesta__cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   margin-top: 0.5rem;
-  padding: 0.9rem 2.2rem;
-  background: #25D366;
-  color: #fff;
-  font-size: 0.95rem;
+  padding: 0.85rem 2rem;
+  background: transparent;
+  border: 1px solid #25D366;
+  color: #25D366;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: 50px;
-  transition: background 0.2s, transform 0.15s;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
 }
 
 .su-richiesta__cta:hover {
-  background: #1ebe5a;
+  background: #25D366;
+  color: #fff;
   transform: translateY(-2px);
 }
 
