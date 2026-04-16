@@ -2181,7 +2181,7 @@ figure {
    FAQ
    ============================================= */
 .faq {
-  padding: 7rem 20px 2rem;
+  padding: 7rem 20px 0.5rem;
 }
 
 .faq__inner {
