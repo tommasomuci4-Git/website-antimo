@@ -264,8 +264,8 @@ function updateAvailability() {
       card.querySelector('.product-card__info').appendChild(avail);
     }
     if (card.dataset.sold === 'true') {
-      avail.textContent = '';
-      avail.classList.remove('product-card__availability--sold');
+      avail.textContent = 'Sold out';
+      avail.classList.add('product-card__availability--sold');
     } else if (isInCart(card.dataset.name)) {
       avail.textContent = 'Reserved';
       avail.classList.add('product-card__availability--sold');
