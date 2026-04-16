@@ -518,6 +518,9 @@ figure {
   text-transform: uppercase;
   color: var(--color-white);
   line-height: 1;
+  display: inline-block;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.3rem;
 }
 
 .catalogo__subtitle {
@@ -1727,6 +1730,9 @@ figure {
   text-transform: uppercase;
   color: var(--color-white);
   line-height: 1;
+  display: inline-block;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.3rem;
 }
 
 .recensioni__subtitle {
