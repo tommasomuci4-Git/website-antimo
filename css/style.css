@@ -564,8 +564,8 @@ figure {
 
 .filtri__btn {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.75);
   padding: 0.3rem 0.9rem;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -575,7 +575,7 @@ figure {
 }
 
 .filtri__btn:hover {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.65);
   color: #fff;
 }
 
