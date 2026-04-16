@@ -321,7 +321,7 @@ figure {
    ============================================= */
 .catalogo {
   background-color: transparent;   /* lascia vedere il graffiti */
-  padding: 20px;
+  padding: 5rem 20px 6rem;
 }
 
 .product-grid {
@@ -436,7 +436,7 @@ figure {
    AUTENTICITÀ — TRUST BAR
    ============================================= */
 .autenticita {
-  padding: var(--spacing-md) var(--spacing-md);
+  padding: 5rem var(--spacing-md);
   margin: 0;
 }
 
@@ -2082,7 +2082,7 @@ figure {
 }
 
 .come-funziona__band {
-  padding: 3rem 20px 2rem;
+  padding: 6rem 20px;
 }
 
 .come-funziona__inner {
@@ -2181,7 +2181,7 @@ figure {
    FAQ
    ============================================= */
 .faq {
-  padding: 7rem 20px 2rem;
+  padding: 7rem 20px 6rem;
 }
 
 .faq__inner {
@@ -2275,7 +2275,7 @@ figure {
    SU RICHIESTA
    ============================================= */
 .su-richiesta {
-  padding: 80px 20px;
+  padding: 7rem 20px;
   text-align: center;
   background: transparent;
 }
@@ -2413,7 +2413,7 @@ figure {
    SOCIAL FEED
    ============================================= */
 .social-feed {
-  padding: var(--spacing-lg) 80px;
+  padding: 6rem 80px;
   background: transparent;
 }
 
