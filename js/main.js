@@ -629,9 +629,9 @@ function applyFilters() {
 
 let _lc = 0, _lt = null;
 document.getElementById('logo-link').addEventListener('click', (e) => {
-  _lc++; clearTimeout(_lt);
+  e.preventDefault(); _lc++; clearTimeout(_lt);
   _lt = setTimeout(() => { _lc = 0; }, 2000);
-  if (_lc >= 5) { _lc = 0; e.preventDefault(); sessionStorage.setItem('admin_access','granted'); window.location.href='/admin.html'; }
+  if (_lc >= 5) { _lc = 0; sessionStorage.setItem('admin_access','granted'); window.location.href='/admin.html'; }
 });
 
 // Init
