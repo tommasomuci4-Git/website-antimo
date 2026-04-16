@@ -141,6 +141,9 @@ function openLightbox(card) {
     lbBuyNow.disabled  = true;
   }
 
+  const isShoe = availableSizes.some(s => /EU/i.test(s));
+  lbSizeGuideBtn.style.display = isShoe ? '' : 'none';
+
   buildDots();
   showImage(0);
   lightbox.hidden = false;
