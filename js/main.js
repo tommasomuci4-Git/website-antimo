@@ -81,7 +81,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     const target = document.querySelector(link.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
+      const block = link.getAttribute('href') === '#recensioni' ? 'center' : 'start';
+      target.scrollIntoView({ behavior: 'smooth', block });
     }
   });
 });
