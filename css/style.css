@@ -2480,8 +2480,13 @@ figure {
     padding: 0;
   }
 
-  .social-feed__grid .social-feed__item:nth-child(5) {
+  .social-feed__grid .social-feed__item:nth-child(1) {
     display: none;
+  }
+
+  .social-feed__grid .social-feed__item:nth-child(5) {
+    display: block;
+    order: -1;
   }
 
   .feed__header {
