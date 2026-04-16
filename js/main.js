@@ -12,6 +12,7 @@ const db = createClient(
 // =============================================
 const dropBanner = document.getElementById('drop-banner');
 const dropBannerClose = document.getElementById('drop-banner-close');
+const dropBannerText = document.getElementById('drop-banner-text');
 
 if (sessionStorage.getItem('dropBannerClosed') === 'true') {
   dropBanner.classList.add('drop-banner--hidden');
@@ -21,6 +22,21 @@ dropBannerClose.addEventListener('click', () => {
   dropBanner.classList.add('drop-banner--hidden');
   sessionStorage.setItem('dropBannerClosed', 'true');
 });
+
+async function loadBanner() {
+  const { data } = await db
+    .from('products')
+    .select('name')
+    .eq('is_new', true)
+    .eq('sold', false);
+
+  const items = data && data.length > 0
+    ? data
+    : [{ name: 'New items coming soon' }];
+
+  const segment = items.map(p => `🔥 NEW DROP — ${p.name} &nbsp;·&nbsp; Available now &nbsp;·&nbsp;`).join(' ');
+  dropBannerText.innerHTML = (segment + ' ').repeat(6);
+}
 
 // =============================================
 //  BACK TO TOP
@@ -631,4 +647,5 @@ logoLink.addEventListener('click', (e) => {
 // Init
 updateCartUI();
 loadProducts();
+loadBanner();
 
