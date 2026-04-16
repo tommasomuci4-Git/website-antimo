@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin — OrigineResell</title>
+  <script>
+    if (sessionStorage.getItem('admin_access') !== 'granted') {
+      window.location.replace('/');
+    }
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

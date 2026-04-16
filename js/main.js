@@ -640,6 +640,7 @@ logoLink.addEventListener('click', (e) => {
   if (logoClickCount >= 5) {
     logoClickCount = 0;
     e.preventDefault();
+    sessionStorage.setItem('admin_access', 'granted');
     window.location.href = '/admin.html';
   }
 });
