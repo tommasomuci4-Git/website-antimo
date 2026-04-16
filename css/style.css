@@ -198,6 +198,12 @@ figure {
   gap: 0.8rem;
 }
 
+@media (min-width: 769px) {
+  .nav-side ul {
+    gap: 1.6rem;
+  }
+}
+
 .nav-side a {
   font-family: var(--font-body-family);
   font-size: 0.9rem;
