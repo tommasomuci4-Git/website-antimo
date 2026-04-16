@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — OrigineResell</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0d0d0d;
+      color: #f0f0f0;
+      min-height: 100vh;
+    }
+
+    /* ---- LOGIN ---- */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .login-box {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .login-box h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .login-box p {
+      color: #888;
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: #0d0d0d;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 0.65rem 0.85rem;
+      color: #f0f0f0;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #0052ff;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-group select option {
+      background: #161616;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.4rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn:not(:disabled):hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .btn--primary { background: #0052ff; color: #fff; width: 100%; }
+    .btn--success { background: #25d366; color: #fff; }
+    .btn--danger  { background: #e53935; color: #fff; }
+    .btn--ghost   { background: transparent; color: #888; border: 1px solid #2a2a2a; }
+
+    .error-msg {
+      background: rgba(229, 57, 53, 0.15);
+      border: 1px solid rgba(229, 57, 53, 0.4);
+      color: #e57373;
+      border-radius: 6px;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+    }
+
+    /* ---- ADMIN PANEL ---- */
+    #admin-panel { display: none; }
+
+    .admin-header {
+      background: #161616;
+      border-bottom: 1px solid #2a2a2a;
+      padding: 0 1.5rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .admin-header h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .admin-header h1 span { color: #0052ff; }
+
+    .admin-main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .admin-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .admin-toolbar h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    /* ---- PRODUCT LIST ---- */
+    #product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .admin-product {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .admin-product:hover { border-color: #333; }
+
+    .admin-product--sold { opacity: 0.55; }
+
+    .admin-product__img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #222;
+      flex-shrink: 0;
+    }
+
+    .admin-product__info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .admin-product__name {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .admin-product__meta {
+      display: block;
+      font-size: 0.78rem;
+      color: #888;
+      margin-top: 0.2rem;
+    }
+
+    .admin-product__actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* Toggle sold */
+    .sold-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .sold-toggle input { display: none; }
+
+    .toggle-track {
+      width: 40px;
+      height: 22px;
+      background: #2a2a2a;
+      border-radius: 50px;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .sold-toggle input:checked + .toggle-track { background: #e53935; }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .sold-toggle input:checked + .toggle-track .toggle-thumb { transform: translateX(18px); }
+
+    .toggle-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      min-width: 58px;
+    }
+
+    .sold-toggle input:checked ~ .toggle-label { color: #e57373; }
+
+    /* ---- MODAL ---- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 100;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+    }
+
+    .modal-box {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 560px;
+      padding: 2rem;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.25rem;
+      line-height: 1;
+    }
+
+    .modal-close:hover { color: #fff; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    /* Image upload */
+    .image-upload-area {
+      border: 2px dashed #2a2a2a;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .image-upload-area:hover { border-color: #0052ff; }
+
+    .image-upload-area input { display: none; }
+
+    .image-upload-area p {
+      color: #888;
+      font-size: 0.85rem;
+    }
+
+    .image-upload-area p strong { color: #0052ff; }
+
+    #image-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .preview-img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #2a2a2a;
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+
+    /* Loading state */
+    .loading-row {
+      text-align: center;
+      padding: 3rem;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .admin-product__actions { flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="login-screen">
+    <div class="login-box">
+      <h1>OrigineResell</h1>
+      <p>Admin panel — access restricted</p>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="admin@example.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn--primary" id="login-btn">Login</button>
+        <div id="login-error" class="error-msg" style="display:none;"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="admin-panel">
+    <header class="admin-header">
+      <h1>Origine<span>Resell</span> Admin</h1>
+      <button class="btn btn--ghost" id="logout-btn">Logout</button>
+    </header>
+    <main class="admin-main">
+      <div class="admin-toolbar">
+        <h2>Products</h2>
+        <button class="btn btn--success" id="add-product-btn">+ Add Product</button>
+      </div>
+      <div id="product-list">
+        <div class="loading-row">Loading products…</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ADD PRODUCT MODAL -->
+  <div class="modal-overlay" id="product-modal" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Add Product</h2>
+        <button class="modal-close" id="modal-close">&#10005;</button>
+      </div>
+      <form id="product-form">
+        <div class="form-group">
+          <label for="prod-name">Product name *</label>
+          <input type="text" id="prod-name" placeholder="Nike Air Max 95 Big Bubble" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prod-brand">Brand *</label>
+            <input type="text" id="prod-brand" placeholder="Nike" required>
+          </div>
+          <div class="form-group">
+            <label for="prod-price">Price *</label>
+            <input type="text" id="prod-price" placeholder="€ 259" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prod-size">Size (display)</label>
+            <input type="text" id="prod-size" placeholder="EU 43 / US 9.5">
+          </div>
+          <div class="form-group">
+            <label for="prod-condition">Condition</label>
+            <select id="prod-condition">
+              <option value="DEADSTOCK">DEADSTOCK</option>
+              <option value="Used">Used</option>
+              <option value="New">New</option>
+              <option value="">— None —</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="prod-category">Category</label>
+          <input type="text" id="prod-category" placeholder="Sneakers">
+        </div>
+        <div class="form-group">
+          <label for="prod-desc">Description (optional)</label>
+          <textarea id="prod-desc" placeholder="Brief description of the item…"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Photos *</label>
+          <label class="image-upload-area" for="images-input">
+            <input type="file" id="images-input" accept="image/*" multiple>
+            <p><strong>Click to upload</strong> or drag photos here</p>
+            <p>The first photo will be the cover image</p>
+          </label>
+          <div id="image-preview"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn--ghost" id="cancel-modal">Cancel</button>
+          <button type="submit" class="btn btn--primary" id="save-btn">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

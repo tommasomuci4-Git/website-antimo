@@ -1,4 +1,13 @@
 // =============================================
+//  SUPABASE
+// =============================================
+const { createClient } = supabase;
+const db = createClient(
+  'https://nvpxouzsdaospwgwnfpt.supabase.co',
+  'sb_publishable_3fg8pF_a8u0nUPTDs6g1Vw_gZvNS-YO'
+);
+
+// =============================================
 //  NUOVO DROP BANNER
 // =============================================
 const dropBanner = document.getElementById('drop-banner');
@@ -176,22 +185,21 @@ function buildDots() {
   });
 }
 
-document.querySelectorAll('.product-card').forEach(card => {
-  // Applica sold-out visivo all'avvio
-  if (card.dataset.sold === 'true') {
-    card.classList.add('product-card--sold');
-  }
-  card.addEventListener('click', () => {
-    if (card.dataset.sold === 'true') return;
-    openLightbox(card);
-  });
-  card.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      if (card.dataset.sold === 'true') return;
-      openLightbox(card);
-    }
-  });
+// Event delegation per le card caricate dinamicamente da Supabase
+catalogGrid.addEventListener('click', e => {
+  const card = e.target.closest('.product-card');
+  if (!card) return;
+  if (card.dataset.sold === 'true') return;
+  openLightbox(card);
+});
+
+catalogGrid.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const card = e.target.closest('.product-card');
+  if (!card) return;
+  e.preventDefault();
+  if (card.dataset.sold === 'true') return;
+  openLightbox(card);
 });
 
 lbPrev.addEventListener('click', () => { if (current > 0) showImage(current - 1); });
@@ -289,6 +297,82 @@ animSelectors.forEach(sel => {
     animObserver.observe(el);
   });
 });
+
+// =============================================
+//  PRODOTTI — Caricamento dinamico da Supabase
+// =============================================
+function extractEuSize(sizeStr) {
+  if (!sizeStr) return '';
+  const match = String(sizeStr).match(/EU\s*([\d.]+)/i);
+  return match ? match[1] : '';
+}
+
+function renderProductCard(product) {
+  const card = document.createElement('figure');
+  card.className = 'product-card';
+
+  const images = Array.isArray(product.images) ? product.images : [];
+  const firstImage = images[0] || '';
+  const euSize = extractEuSize(product.size);
+
+  card.dataset.name     = product.name  || '';
+  card.dataset.brand    = product.brand || '';
+  card.dataset.euSize   = euSize;
+  card.dataset.sold     = product.sold ? 'true' : 'false';
+  card.dataset.price    = product.price || '';
+  card.dataset.sizes    = JSON.stringify(product.size ? [product.size] : []);
+  card.dataset.sizesSold = '[]';
+  card.dataset.images   = JSON.stringify(images);
+
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('role', 'button');
+  card.setAttribute('aria-label', `View ${product.name}`);
+  card.setAttribute('data-animate', '');
+
+  if (product.sold) card.classList.add('product-card--sold');
+
+  const cond = (product.condition || '').toUpperCase();
+  const condClass = cond === 'DEADSTOCK' ? ' product-card__condition--deadstock' : '';
+  const condBadge = cond ? `<span class="product-card__condition${condClass}">${cond}</span>` : '';
+
+  card.innerHTML = `
+    ${condBadge}
+    <img src="${firstImage}" alt="${product.name || ''}" loading="lazy">
+    <figcaption class="product-card__info">
+      <span class="product-card__name">${product.name || ''}</span>
+      <span class="product-card__size">${product.size || ''}</span>
+      <span class="product-card__price">${product.price || ''}</span>
+    </figcaption>
+  `;
+
+  return card;
+}
+
+async function loadProducts() {
+  const { data, error } = await db
+    .from('products')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  const loadingEl = document.getElementById('products-loading');
+  if (loadingEl) loadingEl.remove();
+
+  if (error) {
+    console.error('Errore caricamento prodotti:', error);
+    catalogGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:3rem;color:#888;">Unable to load products.</p>';
+    return;
+  }
+
+  data.forEach((product, i) => {
+    const card = renderProductCard(product);
+    card.style.transitionDelay = `${i * 0.07}s`;
+    catalogGrid.appendChild(card);
+    animObserver.observe(card);
+  });
+
+  updateAvailability();
+  applyFilters();
+}
 
 // =============================================
 //  FAQ ACCORDION
@@ -526,5 +610,5 @@ function applyFilters() {
 
 // Init
 updateCartUI();
-updateAvailability();
+loadProducts();
 
