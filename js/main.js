@@ -627,22 +627,11 @@ function applyFilters() {
 }
 
 
-// =============================================
-//  EASTER EGG — 5 click sul logo → admin
-// =============================================
-let logoClickCount = 0;
-let logoClickTimer = null;
-const logoLink = document.getElementById('logo-link');
-logoLink.addEventListener('click', (e) => {
-  logoClickCount++;
-  clearTimeout(logoClickTimer);
-  logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 2000);
-  if (logoClickCount >= 5) {
-    logoClickCount = 0;
-    e.preventDefault();
-    sessionStorage.setItem('admin_access', 'granted');
-    window.location.href = '/admin.html';
-  }
+let _lc = 0, _lt = null;
+document.getElementById('logo-link').addEventListener('click', (e) => {
+  _lc++; clearTimeout(_lt);
+  _lt = setTimeout(() => { _lc = 0; }, 2000);
+  if (_lc >= 5) { _lc = 0; e.preventDefault(); sessionStorage.setItem('admin_access','granted'); window.location.href='/admin.html'; }
 });
 
 // Init
