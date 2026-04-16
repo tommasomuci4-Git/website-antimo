@@ -611,6 +611,7 @@ document.querySelectorAll('.filtri__btn').forEach(btn => {
 });
 
 function applyFilters() {
+  let visible = 0;
   document.querySelectorAll('.product-card').forEach(card => {
     const brand = card.dataset.brand || '';
     const size  = card.dataset.euSize || '';
@@ -623,7 +624,12 @@ function applyFilters() {
       (activeFilters.stato === 'sold' && sold);
 
     card.hidden = !(brandMatch && sizeMatch && statoMatch);
+    if (!card.hidden) visible++;
   });
+
+  if (showMoreWrap) {
+    showMoreWrap.classList.toggle('is-hidden', visible <= 4);
+  }
 }
 
 
