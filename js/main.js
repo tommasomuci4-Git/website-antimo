@@ -611,6 +611,23 @@ function applyFilters() {
 }
 
 
+// =============================================
+//  EASTER EGG — 5 click sul logo → admin
+// =============================================
+let logoClickCount = 0;
+let logoClickTimer = null;
+const logoLink = document.getElementById('logo-link');
+logoLink.addEventListener('click', (e) => {
+  logoClickCount++;
+  clearTimeout(logoClickTimer);
+  logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 2000);
+  if (logoClickCount >= 5) {
+    logoClickCount = 0;
+    e.preventDefault();
+    window.location.href = '/admin.html';
+  }
+});
+
 // Init
 updateCartUI();
 loadProducts();
