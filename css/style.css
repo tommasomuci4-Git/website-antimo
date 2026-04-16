@@ -1509,13 +1509,14 @@ figure {
   text-align: center;
 }
 
-.footer__logo {
-  width: 120px;
-  opacity: 0.85;
+.footer__brand {
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  opacity: 0.9;
   margin-bottom: 1.5rem;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .footer__social {
