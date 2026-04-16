@@ -1697,7 +1697,7 @@ figure {
    ============================================= */
 .recensioni {
   padding: var(--spacing-lg) var(--spacing-md) 8rem;
-  min-height: 100vh;
+  min-height: 60vh;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
