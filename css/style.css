@@ -1696,7 +1696,7 @@ figure {
    RECENSIONI
    ============================================= */
 .recensioni {
-  padding: var(--spacing-lg) var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-md) 8rem;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
