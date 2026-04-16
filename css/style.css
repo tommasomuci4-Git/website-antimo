@@ -2528,6 +2528,13 @@ figure {
   }
 }
 
+@media (max-width: 768px) {
+  .back-to-top {
+    width: 54px;
+    height: 54px;
+  }
+}
+
 .back-to-top svg {
   width: 20px;
   height: 20px;
