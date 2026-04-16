@@ -1558,7 +1558,7 @@ figure {
     display: none;
   }
 
-  .product-grid.is-expanded .product-card:nth-child(n+5) {
+  .product-grid.is-expanded .product-card:nth-child(n+5):not([hidden]) {
     display: block;
   }
 
