@@ -196,6 +196,8 @@ figure {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  border-left: 2px solid rgba(0, 82, 255, 0.85);
+  padding-left: 0.8rem;
 }
 
 @media (min-width: 769px) {
@@ -281,7 +283,7 @@ figure {
   font-weight: var(--font-heading-weight);
   font-style: var(--font-heading-style);
   font-size: clamp(1.8rem, 4vw, 3rem);
-  letter-spacing: 0.45em;
+  letter-spacing: 0.18em;
   color: var(--color-white);
   text-transform: uppercase;
   line-height: 1;
@@ -327,7 +329,7 @@ figure {
    ============================================= */
 .catalogo {
   background-color: transparent;   /* lascia vedere il graffiti */
-  padding: 5rem 20px 6rem;
+  padding: 6rem 20px;
 }
 
 .product-grid {
@@ -442,7 +444,7 @@ figure {
    AUTENTICITÀ — TRUST BAR
    ============================================= */
 .autenticita {
-  padding: 5rem var(--spacing-md);
+  padding: 6rem var(--spacing-md);
   margin: 0;
 }
 
@@ -461,6 +463,11 @@ figure {
   text-align: center;
   gap: 0.3rem;
   padding: 1rem 0.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.autenticita__item:last-child {
+  border-right: none;
 }
 
 .autenticita__icon {
@@ -490,6 +497,9 @@ figure {
   .autenticita__inner {
     grid-template-columns: repeat(2, 1fr);
   }
+  .autenticita__item:nth-child(even) {
+    border-right: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -518,6 +528,9 @@ figure {
   text-transform: uppercase;
   color: var(--color-white);
   line-height: 1;
+  display: inline-block;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.3rem;
 }
 
 .catalogo__subtitle {
@@ -564,8 +577,8 @@ figure {
 
 .filtri__btn {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.75);
   padding: 0.3rem 0.9rem;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -575,7 +588,7 @@ figure {
 }
 
 .filtri__btn:hover {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.65);
   color: #fff;
 }
 
@@ -702,6 +715,28 @@ figure {
   transform: translateY(0);
 }
 
+/* Animazioni variate per sezione */
+.faq__item[data-animate],
+.come-funziona__header[data-animate],
+.catalogo__header[data-animate] {
+  transform: translateX(-28px);
+}
+
+.rec-card[data-animate]:nth-child(even),
+.feed__item[data-animate]:nth-child(even),
+.autenticita__item[data-animate]:nth-child(even) {
+  transform: translateX(28px);
+}
+
+.faq__item[data-animate].is-visible,
+.come-funziona__header[data-animate].is-visible,
+.catalogo__header[data-animate].is-visible,
+.rec-card[data-animate].is-visible,
+.feed__item[data-animate].is-visible,
+.autenticita__item[data-animate].is-visible {
+  transform: translateX(0);
+}
+
 /* =============================================
    SFONDO — SEZIONE DECORATIVA (spacer graffiti)
    ============================================= */
@@ -727,10 +762,14 @@ figure {
 
 .social-link:hover,
 .social-link:focus-visible {
-  color: var(--color-accent);
   transform: scale(1.15);
   outline: none;
 }
+
+.social-link[aria-label="Instagram"]:hover { color: #e1306c; }
+.social-link[aria-label="TikTok"]:hover    { color: #69c9d0; }
+.social-link[aria-label="WhatsApp"]:hover  { color: #25d366; }
+.social-link[aria-label="Vinted"]:hover    { color: #09b1ba; }
 
 /* =============================================
    LIGHTBOX
@@ -1479,6 +1518,16 @@ figure {
   text-align: center;
 }
 
+.footer__brand {
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
 .footer__social {
   display: flex;
   justify-content: center;
@@ -1489,7 +1538,7 @@ figure {
 .footer__copy {
   font-size: 0.6rem;
   letter-spacing: 0.14em;
-  opacity: 0.3;
+  opacity: 0.55;
   text-transform: uppercase;
 }
 
@@ -1702,7 +1751,7 @@ figure {
    RECENSIONI
    ============================================= */
 .recensioni {
-  padding: var(--spacing-lg) var(--spacing-md) 8rem;
+  padding: 6rem var(--spacing-md);
   min-height: 60vh;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(4px);
@@ -1727,6 +1776,9 @@ figure {
   text-transform: uppercase;
   color: var(--color-white);
   line-height: 1;
+  display: inline-block;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.3rem;
 }
 
 .recensioni__subtitle {
@@ -2089,6 +2141,8 @@ figure {
 
 .come-funziona__band {
   padding: 6rem 20px;
+  border-top: 1px solid rgba(0, 82, 255, 0.3);
+  border-bottom: 1px solid rgba(0, 82, 255, 0.3);
 }
 
 .come-funziona__inner {
@@ -2109,6 +2163,9 @@ figure {
   text-transform: uppercase;
   color: var(--color-white);
   line-height: 1;
+  display: inline-block;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.3rem;
 }
 
 .come-funziona__subtitle {
@@ -2139,11 +2196,18 @@ figure {
 
 
 .cf-step__num {
-  font-family: var(--font-heading-family);
-  font-size: 3rem;
-  line-height: 1;
-  color: rgba(0, 82, 255, 0.6);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body-family);
+  font-size: 0.7rem;
+  font-weight: var(--font-body-weight-bold);
   letter-spacing: 0.05em;
+  color: var(--color-accent);
 }
 
 .cf-step__body {
@@ -2187,7 +2251,7 @@ figure {
    FAQ
    ============================================= */
 .faq {
-  padding: 7rem 20px 0.5rem;
+  padding: 6rem 20px;
 }
 
 .faq__inner {
@@ -2208,6 +2272,9 @@ figure {
   text-transform: uppercase;
   color: var(--color-white);
   line-height: 1;
+  display: inline-block;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.3rem;
 }
 
 .faq__subtitle {
@@ -2225,11 +2292,16 @@ figure {
 }
 
 .faq__item {
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+  transition: padding-left 0.2s ease;
 }
 
 .faq__item:first-of-type {
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.14);
+}
+
+.faq__item:hover {
+  padding-left: 0.5rem;
 }
 
 .faq__btn {
@@ -2282,7 +2354,7 @@ figure {
    SU RICHIESTA
    ============================================= */
 .su-richiesta {
-  padding: 7rem 20px;
+  padding: 6rem 20px;
   text-align: center;
   background: transparent;
 }
@@ -2322,22 +2394,26 @@ figure {
 }
 
 .su-richiesta__cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   margin-top: 0.5rem;
-  padding: 0.9rem 2.2rem;
-  background: #25D366;
-  color: #fff;
-  font-size: 0.95rem;
+  padding: 0.85rem 2rem;
+  background: transparent;
+  border: 1px solid #25D366;
+  color: #25D366;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: 50px;
-  transition: background 0.2s, transform 0.15s;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
 }
 
 .su-richiesta__cta:hover {
-  background: #1ebe5a;
+  background: #25D366;
+  color: #fff;
   transform: translateY(-2px);
 }
 
@@ -2345,7 +2421,7 @@ figure {
    INSTAGRAM FEED
    ============================================= */
 .feed {
-  padding: 4rem 20px;
+  padding: 6rem 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
