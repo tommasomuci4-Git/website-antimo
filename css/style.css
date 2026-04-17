@@ -1250,8 +1250,8 @@ figure {
   background: rgba(10, 10, 10, 0.75);
   border: 1.5px solid rgba(0, 82, 255, 0.35);
   border-radius: 50%;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2580,8 +2580,8 @@ figure {
   bottom: var(--spacing-md);
   right: var(--spacing-md);
   z-index: 900;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.2);
