@@ -631,6 +631,11 @@ function applyFilters() {
   if (showMoreWrap) {
     showMoreWrap.classList.toggle('is-hidden', visible <= 4);
   }
+
+  const isFiltered = activeFilters.brand !== 'tutti' || activeFilters.size !== 'tutti' || activeFilters.stato !== 'tutti';
+  if (isFiltered && catalogGrid) {
+    catalogGrid.classList.add('is-expanded');
+  }
 }
 
 
