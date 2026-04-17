@@ -767,9 +767,9 @@ figure {
 }
 
 .social-link[aria-label="Instagram"]:hover { color: #e1306c; }
-.social-link[aria-label="TikTok"]:hover    { color: #69c9d0; }
-.social-link[aria-label="WhatsApp"]:hover  { color: #25d366; }
-.social-link[aria-label="Vinted"]:hover    { color: #09b1ba; }
+.social-link[aria-label="TikTok"]:hover   { color: #fe2c55; }
+.social-link[aria-label="WhatsApp"]:hover { color: #25d366; }
+.social-link[aria-label="Vinted"]:hover   { color: #09b1ba; }
 
 /* =============================================
    LIGHTBOX
