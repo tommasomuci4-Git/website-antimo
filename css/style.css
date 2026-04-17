@@ -327,7 +327,7 @@ figure {
    ============================================= */
 .catalogo {
   background-color: transparent;   /* lascia vedere il graffiti */
-  padding: 5rem 20px 6rem;
+  padding: 6rem 20px;
 }
 
 .product-grid {
@@ -442,7 +442,7 @@ figure {
    AUTENTICITÀ — TRUST BAR
    ============================================= */
 .autenticita {
-  padding: 5rem var(--spacing-md);
+  padding: 6rem var(--spacing-md);
   margin: 0;
 }
 
@@ -1746,7 +1746,7 @@ figure {
    RECENSIONI
    ============================================= */
 .recensioni {
-  padding: var(--spacing-lg) var(--spacing-md) 8rem;
+  padding: 6rem var(--spacing-md);
   min-height: 60vh;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(4px);
@@ -2136,6 +2136,8 @@ figure {
 
 .come-funziona__band {
   padding: 6rem 20px;
+  border-top: 1px solid rgba(0, 82, 255, 0.3);
+  border-bottom: 1px solid rgba(0, 82, 255, 0.3);
 }
 
 .come-funziona__inner {
@@ -2244,7 +2246,7 @@ figure {
    FAQ
    ============================================= */
 .faq {
-  padding: 7rem 20px 0.5rem;
+  padding: 6rem 20px;
 }
 
 .faq__inner {
@@ -2347,7 +2349,7 @@ figure {
    SU RICHIESTA
    ============================================= */
 .su-richiesta {
-  padding: 7rem 20px;
+  padding: 6rem 20px;
   text-align: center;
   background: transparent;
 }
@@ -2414,7 +2416,7 @@ figure {
    INSTAGRAM FEED
    ============================================= */
 .feed {
-  padding: 4rem 20px;
+  padding: 6rem 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
