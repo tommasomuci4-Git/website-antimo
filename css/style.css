@@ -2613,6 +2613,8 @@ figure {
   .cart-btn {
     right: 0.5rem;
     top: calc(var(--banner-h, 0px) + 0.5rem);
+    width: 48px;
+    height: 48px;
   }
 
   .wa-float {
@@ -2623,8 +2625,8 @@ figure {
   .back-to-top {
     right: 0.5rem;
     bottom: 0.5rem;
-    width: 46px;
-    height: 46px;
+    width: 48px;
+    height: 48px;
   }
 }
 
