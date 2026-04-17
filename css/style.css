@@ -755,17 +755,16 @@ figure {
   height: 26px;
 }
 
-.social-link[aria-label="Instagram"] { color: #e1306c; }
-.social-link[aria-label="TikTok"]    { color: #69c9d0; }
-.social-link[aria-label="WhatsApp"]  { color: #25d366; }
-.social-link[aria-label="Vinted"]    { color: #09b1ba; }
-
 .social-link:hover,
 .social-link:focus-visible {
   transform: scale(1.15);
   outline: none;
-  filter: brightness(1.2);
 }
+
+.social-link[aria-label="Instagram"]:hover { color: #e1306c; }
+.social-link[aria-label="TikTok"]:hover    { color: #69c9d0; }
+.social-link[aria-label="WhatsApp"]:hover  { color: #25d366; }
+.social-link[aria-label="Vinted"]:hover    { color: #09b1ba; }
 
 /* =============================================
    LIGHTBOX
