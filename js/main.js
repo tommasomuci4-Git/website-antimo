@@ -14,13 +14,20 @@ const dropBanner = document.getElementById('drop-banner');
 const dropBannerClose = document.getElementById('drop-banner-close');
 const dropBannerText = document.getElementById('drop-banner-text');
 
+function updateCartTop() {
+  const h = dropBanner.classList.contains('drop-banner--hidden') ? 0 : dropBanner.offsetHeight;
+  document.documentElement.style.setProperty('--banner-h', h + 'px');
+}
+
 if (sessionStorage.getItem('dropBannerClosed') === 'true') {
   dropBanner.classList.add('drop-banner--hidden');
 }
+updateCartTop();
 
 dropBannerClose.addEventListener('click', () => {
   dropBanner.classList.add('drop-banner--hidden');
   sessionStorage.setItem('dropBannerClosed', 'true');
+  updateCartTop();
 });
 
 async function loadBanner() {

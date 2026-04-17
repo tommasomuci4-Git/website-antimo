@@ -1205,7 +1205,7 @@ figure {
    ============================================= */
 .cart-btn {
   position: fixed;
-  top: var(--spacing-md);
+  top: calc(var(--banner-h, 0px) + var(--spacing-md));
   right: var(--spacing-md);
   z-index: 150;
   background: rgba(10, 10, 10, 0.75);
