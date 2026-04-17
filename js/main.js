@@ -34,7 +34,7 @@ async function loadBanner() {
     ? data
     : [{ name: 'New items coming soon' }];
 
-  const segment = items.map(p => `— NEW DROP — ${p.name} &nbsp;·&nbsp; Available now &nbsp;·&nbsp;`).join(' ');
+  const segment = items.map(p => `🔥 NEW DROP — ${p.name} &nbsp;·&nbsp; Available now &nbsp;·&nbsp;`).join(' ');
   dropBannerText.innerHTML = (segment + ' ').repeat(6);
 }
 

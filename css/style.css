@@ -495,6 +495,9 @@ figure {
   .autenticita__inner {
     grid-template-columns: repeat(2, 1fr);
   }
+  .autenticita__item:nth-child(even) {
+    border-right: none;
+  }
 }
 
 @media (max-width: 480px) {
