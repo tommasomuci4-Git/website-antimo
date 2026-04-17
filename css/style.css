@@ -313,15 +313,17 @@ figure {
 }
 
 .hero__scroll-line {
-  width: 1px;
-  height: 36px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.45), transparent);
-  animation: scrollBounce 1.8s ease-in-out infinite;
+  width: 16px;
+  height: 16px;
+  border-right: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
+  transform: rotate(45deg);
+  animation: scrollBounce 1.4s ease-in-out infinite;
 }
 
 @keyframes scrollBounce {
-  0%, 100% { transform: scaleY(1) translateY(0); opacity: 1; }
-  50% { transform: scaleY(0.6) translateY(6px); opacity: 0.4; }
+  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
+  50% { transform: rotate(45deg) translateY(6px); opacity: 1; }
 }
 
 /* TITOLO HERO */
@@ -825,7 +827,7 @@ figure {
 }
 
 .social-link[aria-label="Instagram"]:hover { color: #e1306c; }
-.social-link[aria-label="TikTok"]:hover    { color: #ffffff; }
+.social-link[aria-label="TikTok"]:hover    { color: #69c9d0; }
 .social-link[aria-label="WhatsApp"]:hover  { color: #25d366; }
 .social-link[aria-label="Vinted"]:hover    { color: #09b1ba; }
 
