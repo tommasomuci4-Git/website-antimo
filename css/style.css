@@ -335,7 +335,7 @@ figure {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+  gap: 16px;
   background-color: transparent;
   max-width: 1600px;
   margin: 0 auto;
