@@ -2610,7 +2610,19 @@ figure {
 }
 
 @media (max-width: 768px) {
+  .cart-btn {
+    right: 0.5rem;
+    top: calc(var(--banner-h, 0px) + 0.5rem);
+  }
+
+  .wa-float {
+    left: 0.5rem;
+    bottom: 0.5rem;
+  }
+
   .back-to-top {
+    right: 0.5rem;
+    bottom: 0.5rem;
     width: 46px;
     height: 46px;
   }
