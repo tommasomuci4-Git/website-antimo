@@ -74,41 +74,6 @@ if (showMoreBtn && catalogGrid) {
 }
 
 // =============================================
-//  CURSORE CUSTOM
-// =============================================
-const cursor = document.getElementById('cursor');
-
-if (window.matchMedia('(hover: hover)').matches) {
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
-  });
-
-  document.querySelectorAll('a, button, [role="button"], .product-card, .filtri__btn').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('is-hovering'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('is-hovering'));
-  });
-}
-
-// =============================================
-//  SCROLL SPY NAV
-// =============================================
-const navLinks = document.querySelectorAll('.nav-side a[href^="#"]:not([href="#"])');
-const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-
-const spyObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(a => a.classList.remove('is-active'));
-      const active = document.querySelector(`.nav-side a[href="#${entry.target.id}"]`);
-      if (active) active.classList.add('is-active');
-    }
-  });
-}, { threshold: 0.35 });
-
-sections.forEach(s => spyObserver.observe(s));
-
-// =============================================
 //  SMOOTH SCROLL
 // =============================================
 document.querySelectorAll('a[href^="#"]').forEach(link => {

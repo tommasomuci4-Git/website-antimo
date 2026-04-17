@@ -62,34 +62,6 @@ body {
   text-transform: none;
   letter-spacing: 0em;
   overflow-x: hidden;
-  cursor: none;
-}
-
-/* =============================================
-   CURSORE CUSTOM
-   ============================================= */
-.cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, border-color 0.2s ease, width 0.2s ease, height 0.2s ease;
-  mix-blend-mode: difference;
-}
-
-.cursor.is-hovering {
-  width: 36px;
-  height: 36px;
-  border-color: var(--color-accent);
-}
-
-@media (hover: none) {
-  .cursor { display: none; }
-  body { cursor: auto; }
 }
 
 img {
@@ -250,8 +222,7 @@ figure {
 }
 
 .nav-side a:hover,
-.nav-side a:focus-visible,
-.nav-side a.is-active {
+.nav-side a:focus-visible {
   color: var(--color-accent);
   outline: none;
 }
@@ -288,42 +259,6 @@ figure {
   width: 100%;
   height: auto;
   object-fit: contain;
-}
-
-/* SCROLL INDICATOR */
-.hero__scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  z-index: 3;
-  animation: heroFadeIn 2s ease forwards;
-}
-
-.hero__scroll-text {
-  font-family: var(--font-body-family);
-  font-size: 0.55rem;
-  letter-spacing: 0.25em;
-  color: rgba(255, 255, 255, 0.45);
-  text-transform: uppercase;
-}
-
-.hero__scroll-line {
-  width: 16px;
-  height: 16px;
-  border-right: 1.5px solid rgba(255, 255, 255, 0.5);
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
-  transform: rotate(45deg);
-  animation: scrollBounce 1.4s ease-in-out infinite;
-}
-
-@keyframes scrollBounce {
-  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
-  50% { transform: rotate(45deg) translateY(6px); opacity: 1; }
 }
 
 /* TITOLO HERO */
@@ -820,16 +755,17 @@ figure {
   height: 26px;
 }
 
+.social-link[aria-label="Instagram"] { color: #e1306c; }
+.social-link[aria-label="TikTok"]    { color: #69c9d0; }
+.social-link[aria-label="WhatsApp"]  { color: #25d366; }
+.social-link[aria-label="Vinted"]    { color: #09b1ba; }
+
 .social-link:hover,
 .social-link:focus-visible {
   transform: scale(1.15);
   outline: none;
+  filter: brightness(1.2);
 }
-
-.social-link[aria-label="Instagram"]:hover { color: #e1306c; }
-.social-link[aria-label="TikTok"]:hover    { color: #69c9d0; }
-.social-link[aria-label="WhatsApp"]:hover  { color: #25d366; }
-.social-link[aria-label="Vinted"]:hover    { color: #09b1ba; }
 
 /* =============================================
    LIGHTBOX
