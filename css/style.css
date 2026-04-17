@@ -1541,6 +1541,9 @@ figure {
   opacity: 0.55;
   text-transform: uppercase;
 }
+.brand-name::before {
+  content: attr(data-brand);
+}
 
 /* =============================================
    FIX VIEWPORT MOBILE (iOS address bar)
