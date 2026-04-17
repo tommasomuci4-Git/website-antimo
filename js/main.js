@@ -93,7 +93,7 @@ if (window.matchMedia('(hover: hover)').matches) {
 // =============================================
 //  SCROLL SPY NAV
 // =============================================
-const navLinks = document.querySelectorAll('.nav-side a[href^="#"]');
+const navLinks = document.querySelectorAll('.nav-side a[href^="#"]:not([href="#"])');
 const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
 
 const spyObserver = new IntersectionObserver(entries => {
