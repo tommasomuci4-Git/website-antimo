@@ -1541,8 +1541,11 @@ figure {
   opacity: 0.55;
   text-transform: uppercase;
 }
-.brand-name::before {
-  content: attr(data-brand);
+.footer__brand-logo {
+  height: 0.9em;
+  width: auto;
+  vertical-align: middle;
+  opacity: 0.55;
 }
 
 /* =============================================
