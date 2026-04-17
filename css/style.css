@@ -62,6 +62,7 @@ body {
   text-transform: none;
   letter-spacing: 0em;
   overflow-x: hidden;
+  cursor: url('../images/logo-transparent.svg') 16 16, auto;
 }
 
 img {
