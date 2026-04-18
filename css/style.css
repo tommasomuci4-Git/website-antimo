@@ -2427,8 +2427,18 @@ figure {
   font-size: 0.83rem;
   line-height: 1.7;
   color: rgba(255,255,255,0.5);
-  padding-bottom: 1.1rem;
   padding-right: 2rem;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  padding-bottom: 0;
+  transition: max-height 0.45s ease, opacity 0.3s ease, padding-bottom 0.45s ease;
+}
+
+.faq__answer.is-open {
+  max-height: 20em;
+  opacity: 1;
+  padding-bottom: 1.1rem;
 }
 
 /* =============================================

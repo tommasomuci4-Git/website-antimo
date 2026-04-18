@@ -412,30 +412,6 @@ async function loadProducts() {
 // =============================================
 //  FAQ ACCORDION
 // =============================================
-function faqSlideOpen(el) {
-  if (!el.hidden) return;
-  el.hidden = false;
-  el.style.overflow = 'hidden';
-  el.style.height = '0';
-  el.offsetHeight; // force reflow
-  el.style.transition = 'height 0.38s cubic-bezier(0.4, 0, 0.2, 1)';
-  el.style.height = el.scrollHeight + 'px';
-  el.addEventListener('transitionend', () => { el.style.cssText = ''; }, { once: true });
-}
-
-function faqSlideClose(el) {
-  if (el.hidden) return;
-  el.style.overflow = 'hidden';
-  el.style.height = el.scrollHeight + 'px';
-  el.offsetHeight; // force reflow
-  el.style.transition = 'height 0.32s cubic-bezier(0.4, 0, 0.2, 1)';
-  el.style.height = '0';
-  el.addEventListener('transitionend', () => {
-    el.hidden = true;
-    el.style.cssText = '';
-  }, { once: true });
-}
-
 document.querySelectorAll('.faq__btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const answer = btn.closest('.faq__item').querySelector('.faq__answer');
@@ -444,16 +420,11 @@ document.querySelectorAll('.faq__btn').forEach(btn => {
     document.querySelectorAll('.faq__btn').forEach(b => {
       if (b === btn) return;
       b.setAttribute('aria-expanded', 'false');
-      faqSlideClose(b.closest('.faq__item').querySelector('.faq__answer'));
+      b.closest('.faq__item').querySelector('.faq__answer').classList.remove('is-open');
     });
     // Toggle quella cliccata
-    if (!isOpen) {
-      btn.setAttribute('aria-expanded', 'true');
-      faqSlideOpen(answer);
-    } else {
-      btn.setAttribute('aria-expanded', 'false');
-      faqSlideClose(answer);
-    }
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    answer.classList.toggle('is-open', !isOpen);
   });
 });
 
