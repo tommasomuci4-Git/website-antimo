@@ -1,4 +1,12 @@
 // =============================================
+//  NAV TRANSLATION
+// =============================================
+const _catalogLink = document.getElementById('nav-catalog');
+new MutationObserver(() => {
+  if (_catalogLink) _catalogLink.textContent = document.documentElement.lang.startsWith('it') ? 'CATALOGO' : 'CATALOG';
+}).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+// =============================================
 //  SUPABASE
 // =============================================
 const { createClient } = supabase;
