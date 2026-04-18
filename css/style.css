@@ -742,7 +742,7 @@ figure {
    ============================================= */
 .sfondo {
   width: 100%;
-  height: 2rem;
+  height: 4rem;
   background: transparent;   /* il graffiti del body fa da sfondo */
 }
 
