@@ -2007,10 +2007,12 @@ figure {
 /* CTA — link a Trustpilot */
 .recensioni__cta {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
   margin-top: 2.5rem;
+  flex-wrap: wrap;
 }
 
 .recensioni__cta-link {
@@ -2034,6 +2036,18 @@ figure {
   background: rgba(0, 182, 122, 0.1);
   border-color: rgba(0, 182, 122, 0.7);
   color: #00d68f;
+}
+
+.recensioni__cta-link--write {
+  background: #00b67a;
+  border-color: #00b67a;
+  color: #fff;
+}
+
+.recensioni__cta-link--write:hover {
+  background: #00a06c;
+  border-color: #00a06c;
+  color: #fff;
 }
 
 /* ---- Form recensione ---- */
