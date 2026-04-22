@@ -386,6 +386,7 @@ async function loadProducts() {
   const { data, error } = await db
     .from('products')
     .select('*')
+    .order('sold', { ascending: true })
     .order('is_new', { ascending: false })
     .order('created_at', { ascending: false });
 
