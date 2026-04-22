@@ -792,21 +792,21 @@ figure {
 
 .lightbox__close {
   position: absolute;
-  top: -14px;
-  right: -14px;
+  top: 0.75rem;
+  right: 0.75rem;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.75);
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: rgba(20, 20, 20, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   border-radius: 50%;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.25rem;
   cursor: pointer;
   opacity: 1;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
   line-height: 1;
   padding: 0;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -814,8 +814,9 @@ figure {
 
 .lightbox__close:hover,
 .lightbox__close:focus-visible {
-  background: rgba(0, 0, 0, 0.85);
-  color: #fff;
+  background: rgba(0, 0, 0, 1);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.08);
   outline: none;
 }
 
@@ -1733,13 +1734,7 @@ figure {
   .lightbox__close {
     top: 0.6rem;
     right: 0.6rem;
-    font-size: 1.6rem;
-    padding: 0.6rem;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1.5rem;
   }
 
   .lightbox__name {
