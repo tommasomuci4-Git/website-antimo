@@ -250,54 +250,24 @@
         <p class="recensioni__subtitle">Verified reviews on Trustpilot</p>
       </div>
 
-      <!-- Card recensioni -->
-      <ul class="recensioni__list" aria-label="Customer reviews">
-
-        <li class="rec-card" data-animate>
-          <div class="rec-card__header">
-            <div class="rec-card__avatar" aria-hidden="true">MR</div>
-            <div class="rec-card__meta">
-              <p class="rec-card__name">Marco R.</p>
-              <div class="rec-card__stars" aria-label="5 stars">★★★★★</div>
-              <span class="rec-card__verified">Verified buyer</span>
-            </div>
-            <time class="rec-card__date" datetime="2026-04-10">Apr 10, 2026</time>
-          </div>
-          <p class="rec-card__text">Sneakers arrivate perfette, esattamente come in foto. Spedizione velocissima e packaging curato. Consigliatissimo!</p>
-        </li>
-
-        <li class="rec-card" data-animate>
-          <div class="rec-card__header">
-            <div class="rec-card__avatar" aria-hidden="true">LB</div>
-            <div class="rec-card__meta">
-              <p class="rec-card__name">Luca B.</p>
-              <div class="rec-card__stars" aria-label="5 stars">★★★★★</div>
-              <span class="rec-card__verified">Verified buyer</span>
-            </div>
-            <time class="rec-card__date" datetime="2026-04-03">Apr 3, 2026</time>
-          </div>
-          <p class="rec-card__text">Ho acquistato le Nike Dunk e sono autentiche al 100%. Comunicazione rapida su WhatsApp, esperienza ottima dall'inizio alla fine.</p>
-        </li>
-
-        <li class="rec-card" data-animate>
-          <div class="rec-card__header">
-            <div class="rec-card__avatar" aria-hidden="true">SF</div>
-            <div class="rec-card__meta">
-              <p class="rec-card__name">Sara F.</p>
-              <div class="rec-card__stars" aria-label="5 stars">★★★★★</div>
-              <span class="rec-card__verified">Verified buyer</span>
-            </div>
-            <time class="rec-card__date" datetime="2026-03-28">Mar 28, 2026</time>
-          </div>
-          <p class="rec-card__text">Servizio professionale e affidabile. Ho chiesto un ordine su misura e in pochi giorni hanno trovato esattamente quello che cercavo.</p>
-        </li>
-
-      </ul>
+      <!-- TrustBox widget — recensioni reali Trustpilot -->
+      <div class="recensioni__trustbox">
+        <div class="trustpilot-widget"
+          data-locale="en-US"
+          data-template-id="53aa8912dec7e10d38f59f36"
+          data-businessunit-id="69e228b40e4392f3ae1d1fde"
+          data-style-height="350px"
+          data-style-width="100%"
+          data-theme="dark"
+          data-stars="1,2,3,4,5">
+          <a href="https://www.trustpilot.com/review/origineresell.com" target="_blank" rel="noopener">Trustpilot</a>
+        </div>
+      </div>
 
       <!-- CTA Trustpilot -->
       <div class="recensioni__cta">
         <a class="recensioni__cta-link" href="https://www.trustpilot.com/review/origineresell.com" target="_blank" rel="noopener noreferrer">
-          See all reviews
+          See all on Trustpilot
         </a>
         <a class="recensioni__cta-link recensioni__cta-link--write" href="https://www.trustpilot.com/evaluate/origineresell.com" target="_blank" rel="noopener noreferrer">
           Write a review
@@ -522,6 +492,7 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
   </button>
 
+  <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/main.js" defer></script>
 </body>

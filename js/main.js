@@ -429,25 +429,8 @@ document.querySelectorAll('.faq__btn').forEach(btn => {
 });
 
 // =============================================
-//  RECENSIONI — solo lettura (gestite manualmente via HTML)
+//  RECENSIONI — TrustBox widget (gestito da Trustpilot)
 // =============================================
-const recShowMore = document.getElementById('rec-show-more');
-const recList     = document.getElementById('recensioni-list');
-const REC_LIMIT   = 3;
-
-// Nasconde le card oltre il limite e mostra il bottone "Scopri di più"
-const allCards = recList ? Array.from(recList.querySelectorAll('.rec-card')) : [];
-if (allCards.length > REC_LIMIT) {
-  allCards.slice(REC_LIMIT).forEach(c => { c.hidden = true; });
-  if (recShowMore) recShowMore.hidden = false;
-}
-
-if (recShowMore) {
-  recShowMore.addEventListener('click', () => {
-    recList.querySelectorAll('.rec-card[hidden]').forEach(c => { c.hidden = false; });
-    recShowMore.hidden = true;
-  });
-}
 
 // =============================================
 //  GUIDA TAGLIE

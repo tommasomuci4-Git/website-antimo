@@ -1905,6 +1905,27 @@ figure {
   user-select: none;
 }
 
+.rec-card--skeleton {
+  min-height: 140px;
+  pointer-events: none;
+}
+
+.rec-card--skeleton::before { display: none; }
+
+.rec-card--skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: rec-shimmer 1.4s infinite;
+}
+
+@keyframes rec-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 .rec-card:hover {
   border-color: rgba(0, 182, 122, 0.5);
   transform: translateY(-3px);
@@ -2171,6 +2192,12 @@ figure {
   font-size: 0.95rem;
   padding: 2rem 0 1rem;
   margin: 0;
+}
+
+.recensioni__trustbox {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .rec-show-more {
