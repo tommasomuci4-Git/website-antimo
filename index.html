@@ -35,9 +35,11 @@
     </video>
 
     <nav class="nav-side" aria-label="Main navigation">
-      <!-- Logo 3D coin (Three.js) -->
       <a href="#" class="nav-side__logo-link" aria-label="OrigineResell home" id="logo-link">
-        <canvas id="logo-canvas" class="nav-side__logo-canvas" aria-label="OrigineResell logo"></canvas>
+        <div class="nav-side__logo-wrap">
+          <img class="nav-side__logo nav-side__logo--front" src="images/logo-transparent.svg" alt="OrigineResell logo">
+          <img class="nav-side__logo nav-side__logo--back"  src="images/logo-transparent.svg" alt="" aria-hidden="true">
+        </div>
       </a>
       <ul>
         <li><a href="#catalogo" id="nav-catalog">CATALOG</a></li>
@@ -548,7 +550,6 @@
 
   <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-  <script src="js/main.js" defer></script>
+<script src="js/main.js" defer></script>
 </body>
 </html>

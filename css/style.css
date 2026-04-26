@@ -235,10 +235,30 @@ figure {
   margin-bottom: 1.2rem;
 }
 
-.nav-side__logo-canvas {
+.nav-side__logo-wrap {
+  width: clamp(54px, 8vw, 72px);
+  height: clamp(54px, 8vw, 72px);
+  position: relative;
+  transform-style: preserve-3d;
+  animation: logoSpin3D 4s linear infinite;
+}
+
+.nav-side__logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
-  width: clamp(72px, 10vw, 96px);
-  height: clamp(72px, 10vw, 96px);
+  position: absolute;
+  top: 0; left: 0;
+  backface-visibility: hidden;
+}
+
+.nav-side__logo--front { transform: translateZ(4px); }
+.nav-side__logo--back  { transform: translateZ(-4px) rotateY(180deg); }
+
+@keyframes logoSpin3D {
+  0%   { transform: perspective(200px) rotateY(0deg); }
+  100% { transform: perspective(200px) rotateY(360deg); }
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */
