@@ -237,8 +237,10 @@ figure {
 
 .nav-side__logo {
   width: clamp(54px, 8vw, 72px);
-  height: auto;
+  height: clamp(54px, 8vw, 72px);
   object-fit: contain;
+  display: block;
+  border-radius: 50%;
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */
