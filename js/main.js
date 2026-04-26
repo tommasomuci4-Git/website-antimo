@@ -35,13 +35,16 @@ const db = createClient(
   const camera = new THREE.OrthographicCamera(-CAM_SIZE, CAM_SIZE, CAM_SIZE, -CAM_SIZE, 0.1, 100);
   camera.position.z = 5;
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
-  keyLight.position.set(2, 3, 4);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  keyLight.position.set(2, 0, 4);
   scene.add(keyLight);
-  const fillLight = new THREE.DirectionalLight(0x4477ff, 0.6);
-  fillLight.position.set(-3, -1, 2);
+  const fillLight = new THREE.DirectionalLight(0x4477ff, 0.5);
+  fillLight.position.set(-3, 0, 2);
   scene.add(fillLight);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+  const bottomLight = new THREE.DirectionalLight(0xffffff, 0.6);
+  bottomLight.position.set(0, -4, 3);
+  scene.add(bottomLight);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 
   const rimMat = new THREE.MeshStandardMaterial({
     color:     0x0052ff,
