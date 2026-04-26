@@ -31,7 +31,8 @@ const db = createClient(
 
   const scene  = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-  camera.position.z = 4.2;
+  camera.position.set(0, 0.35, 4.2);
+  camera.lookAt(0, 0, 0);
 
   const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
   keyLight.position.set(2, 3, 4);
