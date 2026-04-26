@@ -330,7 +330,7 @@ const animSelectors = [
   '.faq__item',
   '.chiusura__brand',
   '.chi-siamo__text-side',
-  '.chi-siamo__pillars'
+  '.chi-siamo__why'
 ];
 
 animSelectors.forEach(sel => {
