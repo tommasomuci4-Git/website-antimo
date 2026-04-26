@@ -241,6 +241,9 @@ figure {
   position: relative;
   transform-style: preserve-3d;
   animation: logoSpin3D 4s linear infinite;
+  /* Il wrapper funge da corpo del gettone — visibile di lato come spessore */
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .nav-side__logo {
@@ -250,35 +253,33 @@ figure {
   display: block;
   position: absolute;
   top: 0; left: 0;
+  backface-visibility: hidden; /* nasconde la faccia quando è girata = niente trasparenza */
 }
 
-/* Faccia frontale */
 .nav-side__logo--front {
-  transform: translateZ(5px);
+  transform: translateZ(8px);
 }
 
-/* Faccia posteriore — specchiata per sembrare il retro */
 .nav-side__logo--back {
-  transform: translateZ(-5px) rotateY(180deg);
-  opacity: 0.7;
+  transform: translateZ(-8px) rotateY(180deg);
 }
 
-/* Bordo/spessore del gettone — layer intermedi */
-.nav-side__logo-wrap::before,
-.nav-side__logo-wrap::after {
-  content: '';
+.logo-rim {
   position: absolute;
-  inset: 2px;
-  background: url('images/logo-transparent.svg') center / contain no-repeat;
-  opacity: 0.25;
+  top: 0; left: 0;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.55) 0%,
+    rgba(210,215,235,0.9) 40%,
+    rgba(255,255,255,0.9) 60%,
+    rgba(190,195,220,0.7) 100%
+  );
+  backface-visibility: hidden;
+  pointer-events: none;
 }
-
-.nav-side__logo-wrap::before { transform: translateZ(3px); }
-.nav-side__logo-wrap::after  { transform: translateZ(-3px); }
 
 @keyframes logoSpin3D {
-  0%   { transform: perspective(180px) rotateY(0deg); }
-  100% { transform: perspective(180px) rotateY(360deg); }
+  0%   { transform: perspective(220px) rotateY(0deg); }
+  100% { transform: perspective(220px) rotateY(360deg); }
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */

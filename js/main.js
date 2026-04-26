@@ -16,6 +16,42 @@ const db = createClient(
 );
 
 // =============================================
+//  LOGO 3D COIN RIM
+// =============================================
+function setupCoinLogoRim() {
+  const wrap = document.querySelector('.nav-side__logo-wrap');
+  if (!wrap) return;
+
+  const W = wrap.offsetWidth  || 72;
+  const H = wrap.offsetHeight || 72;
+  const D = 16; // coin thickness (front at +8px, back at -8px)
+
+  const faces = [
+    // Right side: D×H panel centered, rotated to face right
+    { w: D, h: H, x: (W - D) / 2, y: 0, t: `rotateY(90deg) translateZ(${W / 2}px)` },
+    // Left side
+    { w: D, h: H, x: (W - D) / 2, y: 0, t: `rotateY(-90deg) translateZ(${W / 2}px)` },
+    // Top side
+    { w: W, h: D, x: 0, y: (H - D) / 2, t: `rotateX(-90deg) translateZ(${H / 2}px)` },
+    // Bottom side
+    { w: W, h: D, x: 0, y: (H - D) / 2, t: `rotateX(90deg) translateZ(${H / 2}px)` },
+  ];
+
+  faces.forEach(f => {
+    const el = document.createElement('div');
+    el.className = 'logo-rim';
+    el.style.width     = f.w + 'px';
+    el.style.height    = f.h + 'px';
+    el.style.left      = f.x + 'px';
+    el.style.top       = f.y + 'px';
+    el.style.transform = f.t;
+    wrap.appendChild(el);
+  });
+}
+
+setupCoinLogoRim();
+
+// =============================================
 //  NUOVO DROP BANNER
 // =============================================
 const dropBanner = document.getElementById('drop-banner');
