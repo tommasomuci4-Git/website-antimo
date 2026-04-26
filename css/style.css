@@ -235,18 +235,50 @@ figure {
   margin-bottom: 1.2rem;
 }
 
-.nav-side__logo {
+.nav-side__logo-wrap {
   width: clamp(54px, 8vw, 72px);
-  height: auto;
-  object-fit: contain;
-  display: block;
-  animation: logoSpin3D 4s linear infinite;
+  height: clamp(54px, 8vw, 72px);
+  position: relative;
   transform-style: preserve-3d;
+  animation: logoSpin3D 4s linear infinite;
 }
 
+.nav-side__logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  position: absolute;
+  top: 0; left: 0;
+}
+
+/* Faccia frontale */
+.nav-side__logo--front {
+  transform: translateZ(5px);
+}
+
+/* Faccia posteriore — specchiata per sembrare il retro */
+.nav-side__logo--back {
+  transform: translateZ(-5px) rotateY(180deg);
+  opacity: 0.7;
+}
+
+/* Bordo/spessore del gettone — layer intermedi */
+.nav-side__logo-wrap::before,
+.nav-side__logo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: url('images/logo-transparent.svg') center / contain no-repeat;
+  opacity: 0.25;
+}
+
+.nav-side__logo-wrap::before { transform: translateZ(3px); }
+.nav-side__logo-wrap::after  { transform: translateZ(-3px); }
+
 @keyframes logoSpin3D {
-  0%   { transform: perspective(300px) rotateY(0deg); }
-  100% { transform: perspective(300px) rotateY(360deg); }
+  0%   { transform: perspective(180px) rotateY(0deg); }
+  100% { transform: perspective(180px) rotateY(360deg); }
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */

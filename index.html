@@ -37,7 +37,10 @@
     <nav class="nav-side" aria-label="Main navigation">
       <!-- OPZIONE A: logo nel nav in alto a sinistra -->
       <a href="#" class="nav-side__logo-link" aria-label="OrigineResell home" id="logo-link">
-        <img class="nav-side__logo" src="images/logo-transparent.svg" alt="OrigineResell logo">
+        <div class="nav-side__logo-wrap">
+          <img class="nav-side__logo nav-side__logo--front" src="images/logo-transparent.svg" alt="OrigineResell logo">
+          <img class="nav-side__logo nav-side__logo--back"  src="images/logo-transparent.svg" alt="" aria-hidden="true">
+        </div>
       </a>
       <ul>
         <li><a href="#catalogo" id="nav-catalog">CATALOG</a></li>
