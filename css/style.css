@@ -240,13 +240,13 @@ figure {
   height: auto;
   object-fit: contain;
   display: block;
-  animation: logoSpin 8s linear infinite;
-  transform-origin: center center;
+  animation: logoSpin3D 4s linear infinite;
+  transform-style: preserve-3d;
 }
 
-@keyframes logoSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+@keyframes logoSpin3D {
+  0%   { transform: perspective(300px) rotateY(0deg); }
+  100% { transform: perspective(300px) rotateY(360deg); }
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */
