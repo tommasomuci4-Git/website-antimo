@@ -237,10 +237,16 @@ figure {
 
 .nav-side__logo {
   width: clamp(54px, 8vw, 72px);
-  height: clamp(54px, 8vw, 72px);
+  height: auto;
   object-fit: contain;
   display: block;
-  mix-blend-mode: screen;
+  animation: logoSpin 8s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes logoSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */
