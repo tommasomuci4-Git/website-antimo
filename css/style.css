@@ -240,7 +240,7 @@ figure {
   height: clamp(54px, 8vw, 72px);
   object-fit: contain;
   display: block;
-  border-radius: 50%;
+  mix-blend-mode: screen;
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */
