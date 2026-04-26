@@ -128,7 +128,7 @@ figure {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #fff;
-  animation: bannerScroll 18s linear infinite;
+  animation: bannerScroll 32s linear infinite;
   padding-right: 2rem;
 }
 
@@ -2656,6 +2656,182 @@ figure {
   width: 100%;
   height: auto;
   object-fit: contain;
+}
+
+/* =============================================
+   WHY ORIGINE
+   ============================================= */
+.perche {
+  padding: 6rem 1.5rem;
+}
+
+.perche__inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.perche__header {
+  text-align: center;
+}
+
+.perche__title {
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+.perche__title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+}
+
+.perche__subtitle {
+  font-family: var(--font-body-family);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  margin-top: 1rem;
+}
+
+.perche__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.perche__item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 2px solid rgba(0, 82, 255, 0.5);
+  border-radius: 6px;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.perche__icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+}
+
+.perche__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.perche__item-title {
+  font-family: var(--font-body-family);
+  font-size: 0.8rem;
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.perche__item-text {
+  font-family: var(--font-body-family);
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.perche__sourcing {
+  background: linear-gradient(135deg, rgba(0, 82, 255, 0.12), rgba(0, 82, 255, 0.04));
+  border: 1px solid rgba(0, 82, 255, 0.3);
+  border-radius: 8px;
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.perche__sourcing-title {
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: 0.5rem;
+}
+
+.perche__sourcing-desc {
+  font-family: var(--font-body-family);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 480px;
+}
+
+.perche__sourcing-desc em {
+  color: rgba(255, 255, 255, 0.85);
+  font-style: normal;
+  font-weight: var(--font-body-weight-bold);
+}
+
+.perche__sourcing-cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.75rem;
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-body-family);
+  font-size: 0.78rem;
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: opacity 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.perche__sourcing-cta:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .perche__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .perche__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .perche__sourcing {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+  }
+
+  .perche__sourcing-cta {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* =============================================

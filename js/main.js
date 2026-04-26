@@ -39,18 +39,27 @@ dropBannerClose.addEventListener('click', () => {
 });
 
 async function loadBanner() {
+  const marketing = [
+    '✦ Free sourcing on request',
+    '✦ Authenticity guaranteed',
+    '✦ Shipping across Europe',
+    '✦ New drops added weekly',
+    '✦ Trusted reviews on Trustpilot',
+  ];
+
   const { data } = await db
     .from('products')
     .select('name')
     .eq('is_new', true)
     .eq('sold', false);
 
-  const items = data && data.length > 0
-    ? data
-    : [{ name: 'New items coming soon' }];
+  const drops = (data && data.length > 0)
+    ? data.map(p => `🔥 NEW DROP — ${p.name}`)
+    : [];
 
-  const segment = items.map(p => `🔥 NEW DROP — ${p.name} &nbsp;·&nbsp; Available now &nbsp;·&nbsp;`).join(' ');
-  dropBannerText.innerHTML = (segment + ' ').repeat(6);
+  const all = [...drops, ...marketing];
+  const segment = all.map(m => `${m} &nbsp;&nbsp;·&nbsp;&nbsp; `).join('');
+  dropBannerText.innerHTML = (segment).repeat(4);
 }
 
 // =============================================
@@ -352,7 +361,12 @@ function renderProductCard(product) {
   card.dataset.euSize   = euSize;
   card.dataset.sold     = product.sold ? 'true' : 'false';
   card.dataset.price    = product.price || '';
-  card.dataset.sizes    = JSON.stringify(product.size ? [product.size] : []);
+  const parsedSizes = (() => {
+    if (!product.size) return [];
+    try { const p = JSON.parse(product.size); return Array.isArray(p) ? p : [product.size]; }
+    catch { return [product.size]; }
+  })();
+  card.dataset.sizes    = JSON.stringify(parsedSizes);
   card.dataset.sizesSold = '[]';
   card.dataset.images   = JSON.stringify(images);
 

@@ -98,11 +98,54 @@ async function loadAdminProducts() {
 }
 
 // =============================================
+//  SIZES HELPERS
+// =============================================
+function parseSizes(sizeField) {
+  if (!sizeField) return [];
+  try {
+    const parsed = JSON.parse(sizeField);
+    return Array.isArray(parsed) ? parsed : [sizeField];
+  } catch {
+    return [sizeField];
+  }
+}
+
+function buildSizeTags(container, sizes, onRemove) {
+  container.innerHTML = '';
+  sizes.forEach((s, i) => {
+    const tag = document.createElement('span');
+    tag.style.cssText = 'background:#0052ff22;border:1px solid #0052ff66;border-radius:4px;padding:0.2rem 0.5rem;font-size:0.75rem;display:flex;align-items:center;gap:0.3rem;';
+    tag.innerHTML = `${s} <button type="button" style="background:none;border:none;color:#e57373;cursor:pointer;font-size:0.8rem;padding:0;line-height:1;">✕</button>`;
+    tag.querySelector('button').addEventListener('click', () => { onRemove(i); });
+    container.appendChild(tag);
+  });
+}
+
+function setupSizeInput(inputEl, tagsContainer, sizesArray) {
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const val = inputEl.value.trim().replace(/,$/, '');
+      if (val && !sizesArray.includes(val)) {
+        sizesArray.push(val);
+        buildSizeTags(tagsContainer, sizesArray, (i) => {
+          sizesArray.splice(i, 1);
+          buildSizeTags(tagsContainer, sizesArray, arguments.callee);
+        });
+      }
+      inputEl.value = '';
+    }
+  });
+}
+
+// =============================================
 //  RENDER PRODUCT ROW
 // =============================================
 function renderAdminProduct(product) {
   const images     = Array.isArray(product.images) ? product.images : [];
   const firstImage = images[0] || '';
+  const sizes      = parseSizes(product.size);
+  const sizeLabel  = sizes.join(', ') || '—';
 
   const div = document.createElement('div');
   div.className = 'admin-product' + (product.sold ? ' admin-product--sold' : '');
@@ -112,7 +155,7 @@ function renderAdminProduct(product) {
     <img class="admin-product__img" src="${firstImage}" alt="${product.name}" onerror="this.src=''">
     <div class="admin-product__info">
       <span class="admin-product__name">${product.name}</span>
-      <span class="admin-product__meta">${product.brand || '—'} &nbsp;·&nbsp; ${product.price || '—'} &nbsp;·&nbsp; ${product.size || '—'}</span>
+      <span class="admin-product__meta">${product.brand || '—'} &nbsp;·&nbsp; ${product.price || '—'} &nbsp;·&nbsp; ${sizeLabel}</span>
     </div>
     <div class="admin-product__actions">
       <label class="sold-toggle">
@@ -125,6 +168,7 @@ function renderAdminProduct(product) {
         <span class="toggle-track"><span class="toggle-thumb"></span></span>
         <span class="toggle-label">${product.sold ? 'SOLD' : 'Available'}</span>
       </label>
+      <button class="btn btn--ghost btn-edit" style="padding:0.45rem 0.9rem;font-size:0.75rem;">Edit</button>
       <button class="btn btn--danger btn-delete" style="padding:0.45rem 0.9rem;font-size:0.75rem;">Delete</button>
     </div>
   `;
@@ -137,12 +181,7 @@ function renderAdminProduct(product) {
     const val = newCheckbox.checked;
     newLabel.textContent = val ? 'NEW' : 'Standard';
     newTrack.style.background = val ? '#0052ff' : '';
-
-    const { error } = await db
-      .from('products')
-      .update({ is_new: val })
-      .eq('id', product.id);
-
+    const { error } = await db.from('products').update({ is_new: val }).eq('id', product.id);
     if (error) {
       console.error(error);
       newCheckbox.checked = !val;
@@ -159,12 +198,7 @@ function renderAdminProduct(product) {
     const newSold = checkbox.checked;
     toggleLabel.textContent = newSold ? 'SOLD' : 'Available';
     div.classList.toggle('admin-product--sold', newSold);
-
-    const { error } = await db
-      .from('products')
-      .update({ sold: newSold })
-      .eq('id', product.id);
-
+    const { error } = await db.from('products').update({ sold: newSold }).eq('id', product.id);
     if (error) {
       console.error(error);
       checkbox.checked = !newSold;
@@ -174,15 +208,12 @@ function renderAdminProduct(product) {
     }
   });
 
+  div.querySelector('.btn-edit').addEventListener('click', () => openEditModal(product, div));
+
   div.querySelector('.btn-delete').addEventListener('click', async () => {
     if (!confirm(`Delete "${product.name}"? This cannot be undone.`)) return;
-
     const { error } = await db.from('products').delete().eq('id', product.id);
-    if (error) {
-      console.error(error);
-      alert('Error deleting product.');
-      return;
-    }
+    if (error) { console.error(error); alert('Error deleting product.'); return; }
     div.remove();
     if (productList.children.length === 0) {
       productList.innerHTML = '<div class="loading-row">No products yet. Add the first one!</div>';
@@ -193,11 +224,122 @@ function renderAdminProduct(product) {
 }
 
 // =============================================
-//  ADD PRODUCT MODAL
+//  EDIT MODAL
 // =============================================
+const editModal     = document.getElementById('edit-modal');
+const editForm      = document.getElementById('edit-form');
+const editModalClose = document.getElementById('edit-modal-close');
+const editCancel    = document.getElementById('edit-cancel');
+const editSaveBtn   = document.getElementById('edit-save-btn');
+const editSizeInput = document.getElementById('edit-sizes-input');
+const editSizesTags = document.getElementById('edit-sizes-tags');
+
+let editSizes = [];
+
+function openEditModal(product, rowEl) {
+  document.getElementById('edit-id').value    = product.id;
+  document.getElementById('edit-name').value  = product.name  || '';
+  document.getElementById('edit-price').value = product.price || '';
+  document.getElementById('edit-brand').value = product.brand || '';
+
+  editSizes = parseSizes(product.size);
+  rebuildEditTags();
+
+  editModal.style.display = 'flex';
+  editModal._rowEl = rowEl;
+  editModal._product = product;
+}
+
+function rebuildEditTags() {
+  buildSizeTags(editSizesTags, editSizes, (i) => {
+    editSizes.splice(i, 1);
+    rebuildEditTags();
+  });
+}
+
+editSizeInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = editSizeInput.value.trim().replace(/,$/, '');
+    if (val && !editSizes.includes(val)) {
+      editSizes.push(val);
+      rebuildEditTags();
+    }
+    editSizeInput.value = '';
+  }
+});
+
+editModalClose.addEventListener('click', () => { editModal.style.display = 'none'; });
+editCancel.addEventListener('click',     () => { editModal.style.display = 'none'; });
+editModal.addEventListener('click', (e) => { if (e.target === editModal) editModal.style.display = 'none'; });
+
+editForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  editSaveBtn.disabled = true;
+  editSaveBtn.textContent = 'Saving…';
+
+  const id    = document.getElementById('edit-id').value;
+  const name  = document.getElementById('edit-name').value.trim();
+  const price = document.getElementById('edit-price').value.trim();
+  const brand = document.getElementById('edit-brand').value.trim();
+  const sizeVal = editSizes.length === 1 ? editSizes[0] : JSON.stringify(editSizes);
+
+  const { error } = await db
+    .from('products')
+    .update({ name, price, brand, size: sizeVal })
+    .eq('id', id);
+
+  if (error) {
+    console.error(error);
+    alert('Error saving changes: ' + error.message);
+  } else {
+    editModal.style.display = 'none';
+    // Aggiorna la riga nell'admin senza ricaricare tutto
+    const row = editModal._rowEl;
+    row.querySelector('.admin-product__name').textContent = name;
+    row.querySelector('.admin-product__meta').textContent =
+      `${brand || '—'} · ${price || '—'} · ${editSizes.join(', ') || '—'}`;
+    editModal._product.name  = name;
+    editModal._product.price = price;
+    editModal._product.brand = brand;
+    editModal._product.size  = sizeVal;
+  }
+
+  editSaveBtn.disabled = false;
+  editSaveBtn.textContent = 'Save changes';
+});
+
+// =============================================
+//  ADD PRODUCT MODAL — multi-size
+// =============================================
+const addSizeInput = document.getElementById('prod-size');
+const addSizesTags = document.getElementById('add-sizes-tags');
+let addSizes = [];
+
+function rebuildAddTags() {
+  buildSizeTags(addSizesTags, addSizes, (i) => {
+    addSizes.splice(i, 1);
+    rebuildAddTags();
+  });
+}
+
+addSizeInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = addSizeInput.value.trim().replace(/,$/, '');
+    if (val && !addSizes.includes(val)) {
+      addSizes.push(val);
+      rebuildAddTags();
+    }
+    addSizeInput.value = '';
+  }
+});
+
 addProductBtn.addEventListener('click', () => {
   productForm.reset();
   imagePreview.innerHTML = '';
+  addSizes = [];
+  rebuildAddTags();
   productModal.style.display = 'flex';
 });
 
@@ -250,7 +392,9 @@ productForm.addEventListener('submit', async (e) => {
   const name      = document.getElementById('prod-name').value.trim();
   const brand     = document.getElementById('prod-brand').value.trim();
   const price     = document.getElementById('prod-price').value.trim();
-  const size      = document.getElementById('prod-size').value.trim();
+  const lastTyped = addSizeInput.value.trim();
+  if (lastTyped && !addSizes.includes(lastTyped)) addSizes.push(lastTyped);
+  const size      = addSizes.length === 1 ? addSizes[0] : addSizes.length > 1 ? JSON.stringify(addSizes) : '';
   const condition = document.getElementById('prod-condition').value;
   const category  = document.getElementById('prod-category').value.trim();
   const desc      = document.getElementById('prod-desc').value.trim();

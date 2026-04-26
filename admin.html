@@ -429,6 +429,42 @@
     </main>
   </div>
 
+  <!-- EDIT PRODUCT MODAL (price / name / sizes only) -->
+  <div class="modal-overlay" id="edit-modal" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Edit Product</h2>
+        <button class="modal-close" id="edit-modal-close">&#10005;</button>
+      </div>
+      <form id="edit-form">
+        <input type="hidden" id="edit-id">
+        <div class="form-group">
+          <label for="edit-name">Product name</label>
+          <input type="text" id="edit-name" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="edit-price">Price</label>
+            <input type="text" id="edit-price" placeholder="€ 259" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-brand">Brand</label>
+            <input type="text" id="edit-brand">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Sizes <small style="color:#555;font-size:0.7rem;text-transform:none;">(press Enter or comma to add)</small></label>
+          <div id="edit-sizes-tags" style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.5rem;"></div>
+          <input type="text" id="edit-sizes-input" placeholder="es. EU 42 / US 8.5">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn--ghost" id="edit-cancel">Cancel</button>
+          <button type="submit" class="btn btn--primary" id="edit-save-btn">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- ADD PRODUCT MODAL -->
   <div class="modal-overlay" id="product-modal" style="display:none;">
     <div class="modal-box">
@@ -453,8 +489,9 @@
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="prod-size">Size (display)</label>
-            <input type="text" id="prod-size" placeholder="EU 43 / US 9.5">
+            <label for="prod-size">Sizes <small style="color:#555;font-size:0.7rem;text-transform:none;">(Enter o virgola per aggiungere)</small></label>
+            <div id="add-sizes-tags" style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.5rem;"></div>
+            <input type="text" id="prod-size" placeholder="es. EU 42 / US 8.5">
           </div>
           <div class="form-group">
             <label for="prod-condition">Condition</label>
