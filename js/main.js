@@ -79,7 +79,8 @@ const db = createClient(
   }
 
   function makeBackTex(onReady) {
-    const S   = 512;
+    const S  = 512;
+    const cx = S / 2, cy = S / 2;
     const off = document.createElement('canvas');
     off.width = off.height = S;
     const ctx = off.getContext('2d');
@@ -87,20 +88,39 @@ const db = createClient(
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, S, S);
 
-    ctx.save();
-    ctx.translate(S / 2, S / 2);
-    ctx.rotate(-Math.PI / 2);
-    ctx.scale(-1, 1);
-
+    const fontSize = 96;
+    ctx.font      = `bold ${fontSize}px Barlow Condensed, sans-serif`;
     ctx.fillStyle = '#0052ff';
-    ctx.font = 'bold 72px Barlow Condensed, sans-serif';
-    ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.letterSpacing = '4px';
-    ctx.fillText('STAY', 0, -44);
-    ctx.fillText('TUNED', 0, 44);
+    ctx.textAlign    = 'center';
 
-    ctx.restore();
+    const r = 178;
+
+    function drawArcText(text, centerAngle, flip) {
+      const chars  = text.split('');
+      const widths = chars.map(c => ctx.measureText(c).width + 8);
+      const total  = widths.reduce((a, b) => a + b, 0);
+      let angle    = centerAngle - (total / r) / 2;
+
+      chars.forEach((ch, i) => {
+        const step = widths[i] / r;
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angle + step / 2);
+        if (flip) {
+          ctx.translate(0, r);
+          ctx.rotate(Math.PI);
+        } else {
+          ctx.translate(0, -r);
+        }
+        ctx.fillText(ch, 0, 0);
+        ctx.restore();
+        angle += step;
+      });
+    }
+
+    drawArcText('STAY',  -Math.PI / 2, false);
+    drawArcText('TUNED',  Math.PI / 2, true);
 
     const tex = new THREE.CanvasTexture(off);
     tex.colorSpace = THREE.SRGBColorSpace;
