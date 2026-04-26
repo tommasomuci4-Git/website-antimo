@@ -239,6 +239,7 @@ figure {
   display: block;
   width: clamp(72px, 10vw, 96px);
   height: clamp(72px, 10vw, 96px);
+  object-fit: contain;
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */
