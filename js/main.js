@@ -88,23 +88,21 @@ const db = createClient(
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, S, S);
 
-    const fontSize = 78;
-    const r        = 198;
-    const spacing  = 12;
-
     function draw() {
-      ctx.font         = `bold ${fontSize}px Barlow Condensed, sans-serif`;
-      ctx.fillStyle    = '#0052ff';
-      ctx.textAlign    = 'center';
-      ctx.textBaseline = 'middle';
+      // arc text helper: places each char along a circle of radius r
+      // centerAngle=0 → 12 o'clock; flip=true for bottom half
+      function drawArcText(text, fontSize, r, centerAngle, flip) {
+        ctx.font         = `bold ${fontSize}px Barlow Condensed, sans-serif`;
+        ctx.fillStyle    = '#0052ff';
+        ctx.textAlign    = 'center';
+        ctx.textBaseline = 'middle';
 
-      function drawArcText(text, centerAngle, flip) {
-        const chars = text.split('');
-        const widths = chars.map(c => ctx.measureText(c).width);
-        const total = widths.reduce((a, b) => a + b, 0) + spacing * (chars.length - 1);
+        const chars   = text.split('');
+        const spacing = fontSize * 0.06;
+        const widths  = chars.map(c => ctx.measureText(c).width);
+        const total   = widths.reduce((a, b) => a + b, 0) + spacing * (chars.length - 1);
         const totalSpan = total / r;
-        // flip=false (top): start from left (positive θ), go right (decrease θ)
-        // flip=true (bottom): start from left as viewer sees it (negative offset), increase θ
+
         let angle = flip
           ? centerAngle - totalSpan / 2
           : centerAngle + totalSpan / 2;
@@ -118,14 +116,25 @@ const db = createClient(
           ctx.rotate(angle);
           ctx.translate(0, -r);
           if (flip) ctx.rotate(Math.PI);
+          // stroke for definition
+          ctx.strokeStyle = '#0052ff';
+          ctx.lineWidth   = 4;
+          ctx.strokeText(ch, 0, 0);
           ctx.fillText(ch, 0, 0);
           ctx.restore();
           angle += dir * (span / 2 + spacing / r);
         });
       }
 
-      drawArcText('STAY',  0,        false);
-      drawArcText('TUNED', Math.PI,  true);
+      // STAY — big, upper arc
+      drawArcText('STAY',  128, 148, 0,       false);
+      // TUNED — big, lower arc
+      drawArcText('TUNED', 108, 148, Math.PI, true);
+
+      // centre decoration: two small dots at 9 and 3 o'clock
+      ctx.fillStyle = '#0052ff';
+      ctx.beginPath(); ctx.arc(cx - 68, cy, 7, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + 68, cy, 7, 0, Math.PI * 2); ctx.fill();
     }
 
     document.fonts.ready.then(() => {
