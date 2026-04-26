@@ -329,8 +329,9 @@ const animSelectors = [
   '.faq__header',
   '.faq__item',
   '.chiusura__brand',
-  '.chi-siamo__text-side',
-  '.chi-siamo__why'
+  '.chi-siamo__header',
+  '.chi-siamo__intro',
+  '.chi-siamo__item'
 ];
 
 animSelectors.forEach(sel => {

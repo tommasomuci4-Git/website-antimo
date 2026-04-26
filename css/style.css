@@ -2840,107 +2840,100 @@ figure {
    ============================================= */
 .chi-siamo {
   padding: 6rem 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .chi-siamo__inner {
   max-width: 1000px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
 }
 
-.chi-siamo__eyebrow {
-  font-family: var(--font-body-family);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  color: var(--color-accent);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
+.chi-siamo__header {
+  text-align: center;
 }
 
 .chi-siamo__title {
   font-family: var(--font-heading-family);
-  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-  line-height: 1.05;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--color-white);
-  position: relative;
+  line-height: 1;
   display: inline-block;
-  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.4rem;
 }
 
-.chi-siamo__title::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 2.8rem;
-  height: 2px;
-  background: var(--color-accent);
+.chi-siamo__subtitle {
+  font-family: var(--font-body-family);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  margin-top: 1rem;
 }
 
-.chi-siamo__body {
+.chi-siamo__intro {
   font-family: var(--font-body-family);
   font-size: 0.9rem;
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.65);
-  max-width: 480px;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.chi-siamo__why {
+.chi-siamo__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.chi-siamo__item {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 10px;
-  padding: 2rem;
-}
-
-.chi-siamo__why-title {
-  font-family: var(--font-body-family);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: 1.25rem;
-}
-
-.chi-siamo__why-list {
-  list-style: none;
+  border-top: 2px solid rgba(0, 82, 255, 0.5);
+  border-radius: 6px;
+  padding: 1.5rem 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
-.chi-siamo__why-list li {
+.chi-siamo__icon {
+  width: 22px;
+  height: 22px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.chi-siamo__item-title {
   font-family: var(--font-body-family);
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.72);
-  padding-left: 1.1rem;
-  position: relative;
+  font-size: 0.8rem;
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-white);
 }
 
-.chi-siamo__why-list li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.52em;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--color-accent);
+.chi-siamo__item-text {
+  font-family: var(--font-body-family);
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-@media (max-width: 768px) {
-  .chi-siamo__inner {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  .chi-siamo__pillars {
+@media (max-width: 900px) {
+  .chi-siamo__grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .chi-siamo__grid {
+    grid-template-columns: 1fr;
   }
 }
 
