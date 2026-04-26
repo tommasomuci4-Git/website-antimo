@@ -16,40 +16,96 @@ const db = createClient(
 );
 
 // =============================================
-//  LOGO 3D COIN RIM
+//  LOGO 3D COIN — Three.js
 // =============================================
-function setupCoinLogoRim() {
-  const wrap = document.querySelector('.nav-side__logo-wrap');
-  if (!wrap) return;
+(function initCoinLogo() {
+  const canvas = document.getElementById('logo-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
 
-  const W = wrap.offsetWidth  || 72;
-  const H = wrap.offsetHeight || 72;
-  const D = 16; // coin thickness (front at +8px, back at -8px)
+  const SIZE = 144; // internal resolution (2× for retina)
+  canvas.width  = SIZE;
+  canvas.height = SIZE;
 
-  const faces = [
-    // Right side: D×H panel centered, rotated to face right
-    { w: D, h: H, x: (W - D) / 2, y: 0, t: `rotateY(90deg) translateZ(${W / 2}px)` },
-    // Left side
-    { w: D, h: H, x: (W - D) / 2, y: 0, t: `rotateY(-90deg) translateZ(${W / 2}px)` },
-    // Top side
-    { w: W, h: D, x: 0, y: (H - D) / 2, t: `rotateX(-90deg) translateZ(${H / 2}px)` },
-    // Bottom side
-    { w: W, h: D, x: 0, y: (H - D) / 2, t: `rotateX(90deg) translateZ(${H / 2}px)` },
-  ];
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(SIZE, SIZE, false);
+  renderer.setPixelRatio(1);
 
-  faces.forEach(f => {
-    const el = document.createElement('div');
-    el.className = 'logo-rim';
-    el.style.width     = f.w + 'px';
-    el.style.height    = f.h + 'px';
-    el.style.left      = f.x + 'px';
-    el.style.top       = f.y + 'px';
-    el.style.transform = f.t;
-    wrap.appendChild(el);
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+  camera.position.z = 4.2;
+
+  // Lighting — key + fill for metallic rim
+  const keyLight  = new THREE.DirectionalLight(0xffffff, 1.4);
+  keyLight.position.set(2, 3, 4);
+  scene.add(keyLight);
+
+  const fillLight = new THREE.DirectionalLight(0xaabbff, 0.5);
+  fillLight.position.set(-3, -1, 2);
+  scene.add(fillLight);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+
+  // Coin geometry: cylinder, thin like a real coin
+  const geo = new THREE.CylinderGeometry(1, 1, 0.18, 80);
+
+  // Rim material — metallic silver
+  const rimMat = new THREE.MeshStandardMaterial({
+    color:     0xd4d8e8,
+    metalness: 0.85,
+    roughness: 0.25,
   });
-}
 
-setupCoinLogoRim();
+  // Load logo texture for both faces
+  const loader  = new THREE.TextureLoader();
+  const texture = loader.load('images/logo-transparent.svg');
+  texture.colorSpace = THREE.SRGBColorSpace;
+
+  const faceMat = new THREE.MeshStandardMaterial({
+    map:         texture,
+    metalness:   0.1,
+    roughness:   0.6,
+    transparent: true,
+  });
+
+  // Back face: mirror the logo horizontally
+  const texBack = loader.load('images/logo-transparent.svg', t => {
+    t.wrapS     = THREE.RepeatWrapping;
+    t.repeat.set(-1, 1);
+    t.offset.set(1, 0);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.needsUpdate = true;
+  });
+  const backMat = new THREE.MeshStandardMaterial({
+    map:         texBack,
+    metalness:   0.1,
+    roughness:   0.6,
+    transparent: true,
+  });
+
+  // CylinderGeometry material order: [rim, top-cap, bottom-cap]
+  const coin = new THREE.Mesh(geo, [rimMat, faceMat, backMat]);
+
+  // Tilt so flat face looks at camera; pivot handles Y spin
+  coin.rotation.x = Math.PI / 2;
+
+  const pivot = new THREE.Group();
+  pivot.add(coin);
+  scene.add(pivot);
+
+  let raf;
+  function animate() {
+    raf = requestAnimationFrame(animate);
+    pivot.rotation.y += 0.018;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Pause when tab is hidden to save CPU
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(raf);
+    else animate();
+  });
+})();
 
 // =============================================
 //  NUOVO DROP BANNER
