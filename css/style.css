@@ -2663,7 +2663,7 @@ figure {
    WHY ORIGINE
    ============================================= */
 .perche {
-  padding: 6rem 1.5rem;
+  padding: 6rem 1.5rem 3rem;
 }
 
 .perche__inner {
@@ -2839,7 +2839,7 @@ figure {
    CHI SIAMO
    ============================================= */
 .chi-siamo {
-  padding: 2rem 1.5rem 6rem;
+  padding: 0 1.5rem 6rem;
 }
 
 .chi-siamo__inner {
