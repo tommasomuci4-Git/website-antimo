@@ -29,40 +29,36 @@ const db = createClient(
   renderer.setSize(SIZE, SIZE, false);
   renderer.setPixelRatio(1);
 
-  const scene  = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-  camera.position.z = 4.2;
+  const scene = new THREE.Scene();
 
+  // Orthographic camera: eliminates perspective top/bottom asymmetry
+  const F = 1.35;
+  const camera = new THREE.OrthographicCamera(-F, F, F, -F, 0.1, 100);
+  camera.position.z = 5;
+
+  // Symmetric frontal lighting — no Y bias so top and bottom look identical
   const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
-  keyLight.position.set(2, 3, 4);
+  keyLight.position.set(1.5, 0, 5);
   scene.add(keyLight);
-  const fillLight = new THREE.DirectionalLight(0x4477ff, 0.6);
-  fillLight.position.set(-3, -1, 2);
-  scene.add(fillLight);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+  const sideLight = new THREE.DirectionalLight(0x3366ff, 0.7);
+  sideLight.position.set(-2, 0, 3);
+  scene.add(sideLight);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.45));
 
-  // Rim: brand blue metallic
-  const rimMat = new THREE.MeshStandardMaterial({
-    color:     0x0052ff,
-    metalness: 0.75,
-    roughness: 0.25,
-  });
+  const img = new Image();
+  img.onload = () => {
+    const S = 512;
 
-  // Pre-render logo onto a canvas with solid dark background.
-  // This eliminates transparent edges at the coin rim junction.
-  function makeFaceTex(mirrorH, onReady) {
-    const img = new Image();
-    img.onload = () => {
-      const S   = 512;
-      const off = document.createElement('canvas');
-      off.width = off.height = S;
-      const ctx = off.getContext('2d');
+    // Pre-render logo to canvas with solid background.
+    // Eliminates transparent edge artifacts at the rim junction.
+    function makeFaceCanvas(mirrorH) {
+      const c = document.createElement('canvas');
+      c.width = c.height = S;
+      const ctx = c.getContext('2d');
 
-      // Solid dark background matching the site background
       ctx.fillStyle = '#0a0a0a';
       ctx.fillRect(0, 0, S, S);
 
-      // Correct UV rotation (-90°) + optional horizontal mirror
       ctx.save();
       ctx.translate(S / 2, S / 2);
       ctx.rotate(-Math.PI / 2);
@@ -71,25 +67,62 @@ const db = createClient(
       ctx.drawImage(img, 0, 0, S, S);
       ctx.restore();
 
-      const tex = new THREE.CanvasTexture(off);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      onReady(tex);
-    };
-    img.src = 'images/logo-transparent.svg';
-  }
+      // Cover any thin white SVG fringe at the very edge
+      ctx.strokeStyle = '#0a0a0a';
+      ctx.lineWidth = 14;
+      ctx.beginPath();
+      ctx.arc(S / 2, S / 2, S / 2 - 7, 0, Math.PI * 2);
+      ctx.stroke();
 
-  let frontTex = null, backTex = null;
+      return c;
+    }
 
-  function buildCoin() {
-    if (!frontTex || !backTex) return;
+    // Rim texture: sample the face canvas along its circumference.
+    // Three.js CylinderGeometry side UV u=0 aligns with cap UV angle=0
+    // (both at cylinder local +Z, which after rotation.x=PI/2 = screen bottom).
+    // Sampling the face canvas at that same angle gives matching colors.
+    function makeRimCanvas(faceC) {
+      const W = 1024, H = 24;
+      const rc = document.createElement('canvas');
+      rc.width = W; rc.height = H;
+      const rctx = rc.getContext('2d');
+      const fd = faceC.getContext('2d').getImageData(0, 0, S, S).data;
+      const half = S / 2;
+      const r = half - 22; // sample just inside the dark edge ring
 
-    // Slightly thicker coin so the blue rim is clearly visible
-    const geo = new THREE.CylinderGeometry(1, 1, 0.24, 80);
+      const px = rctx.createImageData(W, H);
+      for (let x = 0; x < W; x++) {
+        const angle = (x / W) * Math.PI * 2;
+        const cx = Math.min(Math.max(Math.round(half + r * Math.cos(angle)), 0), S - 1);
+        const cy = Math.min(Math.max(Math.round(half + r * Math.sin(angle)), 0), S - 1);
+        const si = (cy * S + cx) * 4;
+        for (let y = 0; y < H; y++) {
+          const di = (y * W + x) * 4;
+          px.data[di]     = fd[si];
+          px.data[di + 1] = fd[si + 1];
+          px.data[di + 2] = fd[si + 2];
+          px.data[di + 3] = 255;
+        }
+      }
+      rctx.putImageData(px, 0, 0);
+      return rc;
+    }
 
-    const frontMat = new THREE.MeshStandardMaterial({ map: frontTex, metalness: 0.1, roughness: 0.55 });
-    const backMat  = new THREE.MeshStandardMaterial({ map: backTex,  metalness: 0.1, roughness: 0.55 });
+    const frontC = makeFaceCanvas(true);
+    const backC  = makeFaceCanvas(false);
+    const rimC   = makeRimCanvas(frontC);
 
-    // [rim, top-cap, bottom-cap]
+    function toTex(c) {
+      const t = new THREE.CanvasTexture(c);
+      t.colorSpace = THREE.SRGBColorSpace;
+      return t;
+    }
+
+    const rimMat   = new THREE.MeshStandardMaterial({ map: toTex(rimC),   metalness: 0.55, roughness: 0.28 });
+    const frontMat = new THREE.MeshStandardMaterial({ map: toTex(frontC), metalness: 0.05, roughness: 0.6 });
+    const backMat  = new THREE.MeshStandardMaterial({ map: toTex(backC),  metalness: 0.05, roughness: 0.6 });
+
+    const geo  = new THREE.CylinderGeometry(1, 1, 0.24, 80);
     const coin = new THREE.Mesh(geo, [rimMat, frontMat, backMat]);
     coin.rotation.x = Math.PI / 2;
 
@@ -109,12 +142,8 @@ const db = createClient(
       if (document.hidden) cancelAnimationFrame(raf);
       else animate();
     });
-  }
-
-  // Front: mirror=true fixes the UV horizontal flip from the cylinder cap
-  // Back:  mirror=false (already mirrored by the bottom cap UV)
-  makeFaceTex(true,  tex => { frontTex = tex; buildCoin(); });
-  makeFaceTex(false, tex => { backTex  = tex; buildCoin(); });
+  };
+  img.src = 'images/logo-transparent.svg';
 })();
 
 // =============================================
