@@ -79,7 +79,7 @@ const db = createClient(
   }
 
   function makeBackTex(onReady) {
-    const S  = 512;
+    const S = 512;
     const cx = S / 2, cy = S / 2;
     const off = document.createElement('canvas');
     off.width = off.height = S;
@@ -88,43 +88,52 @@ const db = createClient(
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, S, S);
 
-    const fontSize = 96;
-    ctx.font      = `bold ${fontSize}px Barlow Condensed, sans-serif`;
-    ctx.fillStyle = '#0052ff';
-    ctx.textBaseline = 'middle';
-    ctx.textAlign    = 'center';
+    const fontSize = 78;
+    const r        = 198;
+    const spacing  = 12;
 
-    const r = 178;
+    function draw() {
+      ctx.font         = `bold ${fontSize}px Barlow Condensed, sans-serif`;
+      ctx.fillStyle    = '#0052ff';
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
 
-    function drawArcText(text, centerAngle, flip) {
-      const chars  = text.split('');
-      const widths = chars.map(c => ctx.measureText(c).width + 8);
-      const total  = widths.reduce((a, b) => a + b, 0);
-      let angle    = centerAngle - (total / r) / 2;
+      function drawArcText(text, centerAngle, flip) {
+        const chars = text.split('');
+        const widths = chars.map(c => ctx.measureText(c).width);
+        const total = widths.reduce((a, b) => a + b, 0) + spacing * (chars.length - 1);
+        const totalSpan = total / r;
+        // flip=false (top): start from left (positive θ), go right (decrease θ)
+        // flip=true (bottom): start from left as viewer sees it (negative offset), increase θ
+        let angle = flip
+          ? centerAngle - totalSpan / 2
+          : centerAngle + totalSpan / 2;
+        const dir = flip ? 1 : -1;
 
-      chars.forEach((ch, i) => {
-        const step = widths[i] / r;
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate(angle + step / 2);
-        if (flip) {
-          ctx.translate(0, r);
-          ctx.rotate(Math.PI);
-        } else {
+        chars.forEach(ch => {
+          const span = ctx.measureText(ch).width / r;
+          angle += dir * span / 2;
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate(angle);
           ctx.translate(0, -r);
-        }
-        ctx.fillText(ch, 0, 0);
-        ctx.restore();
-        angle += step;
-      });
+          if (flip) ctx.rotate(Math.PI);
+          ctx.fillText(ch, 0, 0);
+          ctx.restore();
+          angle += dir * (span / 2 + spacing / r);
+        });
+      }
+
+      drawArcText('STAY',  0,        false);
+      drawArcText('TUNED', Math.PI,  true);
     }
 
-    drawArcText('STAY',  -Math.PI / 2, false);
-    drawArcText('TUNED',  Math.PI / 2, true);
-
-    const tex = new THREE.CanvasTexture(off);
-    tex.colorSpace = THREE.SRGBColorSpace;
-    onReady(tex);
+    document.fonts.ready.then(() => {
+      draw();
+      const tex = new THREE.CanvasTexture(off);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      onReady(tex);
+    });
   }
 
   let frontTex = null, backTex = null;
