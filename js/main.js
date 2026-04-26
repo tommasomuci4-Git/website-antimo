@@ -78,12 +78,41 @@ const db = createClient(
     img.src = 'images/logo-transparent.svg';
   }
 
+  function makeBackTex(onReady) {
+    const S   = 512;
+    const off = document.createElement('canvas');
+    off.width = off.height = S;
+    const ctx = off.getContext('2d');
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, S, S);
+
+    ctx.save();
+    ctx.translate(S / 2, S / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.scale(-1, 1);
+
+    ctx.fillStyle = '#0052ff';
+    ctx.font = 'bold 72px Barlow Condensed, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.letterSpacing = '4px';
+    ctx.fillText('STAY', 0, -44);
+    ctx.fillText('TUNED', 0, 44);
+
+    ctx.restore();
+
+    const tex = new THREE.CanvasTexture(off);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    onReady(tex);
+  }
+
   let frontTex = null, backTex = null;
 
   function buildCoin() {
     if (!frontTex || !backTex) return;
 
-    const geo      = new THREE.CylinderGeometry(1, 1, 0.13, 80);
+    const geo      = new THREE.CylinderGeometry(1, 1, 0.24, 80);
     const frontMat = new THREE.MeshStandardMaterial({ map: frontTex, metalness: 0.1, roughness: 0.55 });
     const backMat  = new THREE.MeshStandardMaterial({ map: backTex,  metalness: 0.1, roughness: 0.55 });
     const coin     = new THREE.Mesh(geo, [rimMat, frontMat, backMat]);
@@ -107,8 +136,8 @@ const db = createClient(
     });
   }
 
-  makeFaceTex(true,  tex => { frontTex = tex; buildCoin(); });
-  makeFaceTex(false, tex => { backTex  = tex; buildCoin(); });
+  makeFaceTex(true, tex => { frontTex = tex; buildCoin(); });
+  makeBackTex(      tex => { backTex  = tex; buildCoin(); });
 })();
 
 // =============================================
