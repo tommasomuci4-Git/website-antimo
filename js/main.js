@@ -48,35 +48,41 @@ const db = createClient(
   // Coin geometry: cylinder, thin like a real coin
   const geo = new THREE.CylinderGeometry(1, 1, 0.18, 80);
 
-  // Rim material — metallic silver
+  // Rim material — brand blue metallic
   const rimMat = new THREE.MeshStandardMaterial({
-    color:     0xd4d8e8,
-    metalness: 0.85,
-    roughness: 0.25,
+    color:     0x0052ff,
+    metalness: 0.7,
+    roughness: 0.3,
   });
 
   // Load logo texture for both faces
   const loader  = new THREE.TextureLoader();
-  const texture = loader.load('images/logo-transparent.svg');
-  texture.colorSpace = THREE.SRGBColorSpace;
+
+  function loadFaceTex(flip, cb) {
+    return loader.load('images/logo-transparent.svg', t => {
+      t.colorSpace  = THREE.SRGBColorSpace;
+      t.center.set(0.5, 0.5);
+      // Rotate texture upright (-90° corrects the cylinder cap UV orientation)
+      t.rotation = -Math.PI / 2;
+      if (flip) {
+        t.wrapS = THREE.RepeatWrapping;
+        t.repeat.set(-1, 1);
+        t.offset.set(1, 0);
+      }
+      t.needsUpdate = true;
+      if (cb) cb(t);
+    });
+  }
 
   const faceMat = new THREE.MeshStandardMaterial({
-    map:         texture,
+    map:         loadFaceTex(false),
     metalness:   0.1,
     roughness:   0.6,
     transparent: true,
   });
 
-  // Back face: mirror the logo horizontally
-  const texBack = loader.load('images/logo-transparent.svg', t => {
-    t.wrapS     = THREE.RepeatWrapping;
-    t.repeat.set(-1, 1);
-    t.offset.set(1, 0);
-    t.colorSpace = THREE.SRGBColorSpace;
-    t.needsUpdate = true;
-  });
   const backMat = new THREE.MeshStandardMaterial({
-    map:         texBack,
+    map:         loadFaceTex(true),
     metalness:   0.1,
     roughness:   0.6,
     transparent: true,

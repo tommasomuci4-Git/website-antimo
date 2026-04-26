@@ -237,8 +237,8 @@ figure {
 
 .nav-side__logo-canvas {
   display: block;
-  width: clamp(54px, 8vw, 72px);
-  height: clamp(54px, 8vw, 72px);
+  width: clamp(72px, 10vw, 96px);
+  height: clamp(72px, 10vw, 96px);
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */
