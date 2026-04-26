@@ -235,20 +235,12 @@ figure {
   margin-bottom: 1.2rem;
 }
 
-.logo-video-wrap {
+.nav-side__logo-canvas {
+  display: block;
   width: clamp(72px, 10vw, 96px);
   height: clamp(72px, 10vw, 96px);
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-}
-.nav-side__logo-canvas {
-  position: absolute;
-  width: 220%;
-  height: 220%;
-  top: -60%;
-  left: -60%;
-  object-fit: cover;
+  object-fit: contain;
+  mix-blend-mode: screen;
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */
