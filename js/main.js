@@ -22,9 +22,8 @@ const db = createClient(
   const canvas = document.getElementById('logo-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
 
-  const SIZE = 144; // internal resolution (2× for retina)
-  canvas.width  = SIZE;
-  canvas.height = SIZE;
+  const SIZE = 144;
+  canvas.width = canvas.height = SIZE;
 
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setSize(SIZE, SIZE, false);
@@ -34,83 +33,88 @@ const db = createClient(
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
   camera.position.z = 4.2;
 
-  // Lighting — key + fill for metallic rim
-  const keyLight  = new THREE.DirectionalLight(0xffffff, 1.4);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
   keyLight.position.set(2, 3, 4);
   scene.add(keyLight);
-
-  const fillLight = new THREE.DirectionalLight(0xaabbff, 0.5);
+  const fillLight = new THREE.DirectionalLight(0x4477ff, 0.6);
   fillLight.position.set(-3, -1, 2);
   scene.add(fillLight);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.3));
-
-  // Coin geometry: cylinder, thin like a real coin
-  const geo = new THREE.CylinderGeometry(1, 1, 0.18, 80);
-
-  // Rim material — brand blue metallic
+  // Rim: brand blue metallic
   const rimMat = new THREE.MeshStandardMaterial({
     color:     0x0052ff,
-    metalness: 0.7,
-    roughness: 0.3,
+    metalness: 0.75,
+    roughness: 0.25,
   });
 
-  // Load logo texture for both faces
-  const loader  = new THREE.TextureLoader();
+  // Pre-render logo onto a canvas with solid dark background.
+  // This eliminates transparent edges at the coin rim junction.
+  function makeFaceTex(mirrorH, onReady) {
+    const img = new Image();
+    img.onload = () => {
+      const S   = 512;
+      const off = document.createElement('canvas');
+      off.width = off.height = S;
+      const ctx = off.getContext('2d');
 
-  function loadFaceTex(flip, cb) {
-    return loader.load('images/logo-transparent.svg', t => {
-      t.colorSpace  = THREE.SRGBColorSpace;
-      t.center.set(0.5, 0.5);
-      // Rotate texture upright (-90° corrects the cylinder cap UV orientation)
-      t.rotation = -Math.PI / 2;
-      if (flip) {
-        t.wrapS = THREE.RepeatWrapping;
-        t.repeat.set(-1, 1);
-        t.offset.set(1, 0);
-      }
-      t.needsUpdate = true;
-      if (cb) cb(t);
+      // Solid dark background matching the site background
+      ctx.fillStyle = '#0a0a0a';
+      ctx.fillRect(0, 0, S, S);
+
+      // Correct UV rotation (-90°) + optional horizontal mirror
+      ctx.save();
+      ctx.translate(S / 2, S / 2);
+      ctx.rotate(-Math.PI / 2);
+      if (mirrorH) ctx.scale(-1, 1);
+      ctx.translate(-S / 2, -S / 2);
+      ctx.drawImage(img, 0, 0, S, S);
+      ctx.restore();
+
+      const tex = new THREE.CanvasTexture(off);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      onReady(tex);
+    };
+    img.src = 'images/logo-transparent.svg';
+  }
+
+  let frontTex = null, backTex = null;
+
+  function buildCoin() {
+    if (!frontTex || !backTex) return;
+
+    // Slightly thicker coin so the blue rim is clearly visible
+    const geo = new THREE.CylinderGeometry(1, 1, 0.24, 80);
+
+    const frontMat = new THREE.MeshStandardMaterial({ map: frontTex, metalness: 0.1, roughness: 0.55 });
+    const backMat  = new THREE.MeshStandardMaterial({ map: backTex,  metalness: 0.1, roughness: 0.55 });
+
+    // [rim, top-cap, bottom-cap]
+    const coin = new THREE.Mesh(geo, [rimMat, frontMat, backMat]);
+    coin.rotation.x = Math.PI / 2;
+
+    const pivot = new THREE.Group();
+    pivot.add(coin);
+    scene.add(pivot);
+
+    let raf;
+    function animate() {
+      raf = requestAnimationFrame(animate);
+      pivot.rotation.y += 0.018;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else animate();
     });
   }
 
-  const faceMat = new THREE.MeshStandardMaterial({
-    map:         loadFaceTex(false),
-    metalness:   0.1,
-    roughness:   0.6,
-    transparent: true,
-  });
-
-  const backMat = new THREE.MeshStandardMaterial({
-    map:         loadFaceTex(true),
-    metalness:   0.1,
-    roughness:   0.6,
-    transparent: true,
-  });
-
-  // CylinderGeometry material order: [rim, top-cap, bottom-cap]
-  const coin = new THREE.Mesh(geo, [rimMat, faceMat, backMat]);
-
-  // Tilt so flat face looks at camera; pivot handles Y spin
-  coin.rotation.x = Math.PI / 2;
-
-  const pivot = new THREE.Group();
-  pivot.add(coin);
-  scene.add(pivot);
-
-  let raf;
-  function animate() {
-    raf = requestAnimationFrame(animate);
-    pivot.rotation.y += 0.018;
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  // Pause when tab is hidden to save CPU
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) cancelAnimationFrame(raf);
-    else animate();
-  });
+  // Front: mirror=true fixes the UV horizontal flip from the cylinder cap
+  // Back:  mirror=false (already mirrored by the bottom cap UV)
+  makeFaceTex(true,  tex => { frontTex = tex; buildCoin(); });
+  makeFaceTex(false, tex => { backTex  = tex; buildCoin(); });
 })();
 
 // =============================================
