@@ -83,7 +83,7 @@ const db = createClient(
   function buildCoin() {
     if (!frontTex || !backTex) return;
 
-    const geo      = new THREE.CylinderGeometry(1, 1, 0.24, 80);
+    const geo      = new THREE.CylinderGeometry(1, 1, 0.13, 80);
     const frontMat = new THREE.MeshStandardMaterial({ map: frontTex, metalness: 0.1, roughness: 0.55 });
     const backMat  = new THREE.MeshStandardMaterial({ map: backTex,  metalness: 0.1, roughness: 0.55 });
     const coin     = new THREE.Mesh(geo, [rimMat, frontMat, backMat]);
