@@ -260,20 +260,20 @@ figure {
 .nav-side__logo-link {
   display: block;
   margin-bottom: 0.3rem;
-  margin-left: -0.8rem;
+  margin-left: -1.2rem;
 }
 
 .nav-side__logo-canvas {
   display: block;
-  width: clamp(110px, 14vw, 150px);
-  height: clamp(110px, 14vw, 150px);
+  width: clamp(130px, 16vw, 170px);
+  height: clamp(130px, 16vw, 170px);
   aspect-ratio: 1 / 1;
 }
 
 @media (max-width: 768px) {
   .nav-side__logo-canvas {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
   }
 }
 
