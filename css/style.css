@@ -259,7 +259,7 @@ figure {
 /* OPZIONE A — Logo nel nav in alto a sinistra */
 .nav-side__logo-link {
   display: block;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.3rem;
 }
 
 .nav-side__logo-canvas {
