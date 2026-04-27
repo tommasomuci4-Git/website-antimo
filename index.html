@@ -45,7 +45,10 @@
 
     <nav class="nav-side" aria-label="Main navigation">
       <a href="#" class="nav-side__logo-link" aria-label="OrigineResell home" id="logo-link">
-        <canvas id="coin-canvas" class="nav-side__logo-canvas" aria-hidden="true"></canvas>
+        <video id="logo-video" autoplay muted loop playsinline aria-hidden="true" style="display:none">
+          <source src="images/logo-3d.mp4" type="video/mp4">
+        </video>
+        <canvas id="logo-canvas" class="nav-side__logo-canvas" aria-hidden="true"></canvas>
       </a>
       <ul>
         <li><a href="#catalogo" id="nav-catalog">CATALOG</a></li>
@@ -539,7 +542,6 @@
 
   <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 <script src="js/main.js" defer></script>
 </body>
 </html>

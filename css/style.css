@@ -262,10 +262,6 @@ figure {
   margin-bottom: 1.2rem;
 }
 
-.nav-side__logo-video {
-  display: none;
-}
-
 .nav-side__logo-canvas {
   display: block;
   width: clamp(72px, 10vw, 96px);
