@@ -270,6 +270,13 @@ figure {
   aspect-ratio: 1 / 1;
 }
 
+@media (max-width: 768px) {
+  .nav-side__logo-canvas {
+    width: 90px;
+    height: 90px;
+  }
+}
+
 /* OPZIONE B — Watermark in basso a sinistra */
 .hero__watermark {
   position: absolute;

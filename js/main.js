@@ -699,6 +699,7 @@ loadBanner();
   function start() {
     if (running) return;
     running = true;
+    video.playbackRate = 2.5;
     video.play().catch(() => {});
     processFrame();
   }
