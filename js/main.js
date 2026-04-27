@@ -709,10 +709,15 @@ loadBanner();
   if (video.readyState >= 2) start();
 
   video.addEventListener('timeupdate', () => {
-    if (video.duration && video.currentTime > video.duration - 0.15) {
+    if (video.duration && video.currentTime > video.duration - 0.4) {
       video.currentTime = 0;
       video.play().catch(() => {});
     }
+  });
+
+  video.addEventListener('ended', () => {
+    video.currentTime = 0;
+    video.play().catch(() => {});
   });
 
   document.addEventListener('visibilitychange', () => {
