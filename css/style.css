@@ -2664,9 +2664,6 @@ figure {
    ============================================= */
 .perche {
   padding: 6rem 1.5rem 3rem;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
 }
 
 .perche__inner {
@@ -2718,9 +2715,9 @@ figure {
 }
 
 .perche__item {
-  background: rgba(10, 10, 16, 0.80);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-top: 2px solid rgba(0, 82, 255, 0.5);
   border-radius: 6px;
@@ -2761,9 +2758,9 @@ figure {
 }
 
 .perche__sourcing {
-  background: rgba(10, 10, 16, 0.80);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(0, 82, 255, 0.3);
   border-radius: 8px;
   padding: 2rem 2.5rem;
