@@ -685,7 +685,13 @@ loadBanner();
   let running = false;
   function processFrame() {
     if (video.readyState < 2 || video.seeking) { requestAnimationFrame(processFrame); return; }
-    ctx.drawImage(video, 0, 0, SIZE, SIZE);
+    ctx.clearRect(0, 0, SIZE, SIZE);
+    const vw = video.videoWidth || SIZE;
+    const vh = video.videoHeight || SIZE;
+    const scale = Math.min(SIZE / vw, SIZE / vh);
+    const drawW = vw * scale;
+    const drawH = vh * scale;
+    ctx.drawImage(video, (SIZE - drawW) / 2, (SIZE - drawH) / 2, drawW, drawH);
     const img  = ctx.getImageData(0, 0, SIZE, SIZE);
     const data = img.data;
     for (let i = 0; i < data.length; i += 4) {
