@@ -272,8 +272,8 @@ figure {
 
 @media (max-width: 768px) {
   .nav-side__logo-canvas {
-    width: 90px;
-    height: 90px;
+    width: 120px;
+    height: 120px;
   }
 }
 
