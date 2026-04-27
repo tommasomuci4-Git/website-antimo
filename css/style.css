@@ -260,6 +260,7 @@ figure {
 .nav-side__logo-link {
   display: block;
   margin-bottom: 0.3rem;
+  margin-left: -0.8rem;
 }
 
 .nav-side__logo-canvas {
