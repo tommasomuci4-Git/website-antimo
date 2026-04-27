@@ -835,7 +835,7 @@ figure {
 /* Colonna immagine */
 .lightbox__img-wrap {
   position: relative;
-  background: #f5f5f5;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
