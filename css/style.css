@@ -2715,8 +2715,10 @@ figure {
 }
 
 .perche__item {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(10, 10, 16, 0.80);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-top: 2px solid rgba(0, 82, 255, 0.5);
   border-radius: 6px;
   padding: 1.5rem 1.25rem;
@@ -2756,7 +2758,9 @@ figure {
 }
 
 .perche__sourcing {
-  background: linear-gradient(135deg, rgba(0, 82, 255, 0.12), rgba(0, 82, 255, 0.04));
+  background: rgba(10, 10, 16, 0.80);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(0, 82, 255, 0.3);
   border-radius: 8px;
   padding: 2rem 2.5rem;
