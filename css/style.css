@@ -1606,7 +1606,7 @@ figure {
   }
 
   .hero__title {
-    font-size: clamp(0.65rem, 2.5vw, 1rem);
+    font-size: clamp(0.85rem, 3vw, 1.2rem);
     letter-spacing: 0.3em;
   }
 
@@ -1726,7 +1726,7 @@ figure {
   }
 
   .hero__title {
-    font-size: clamp(0.6rem, 3.5vw, 0.9rem);
+    font-size: clamp(0.78rem, 4.5vw, 1.05rem);
     letter-spacing: 0.25em;
   }
 
