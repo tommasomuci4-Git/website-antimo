@@ -708,6 +708,13 @@ loadBanner();
   video.addEventListener('play', start);
   if (video.readyState >= 2) start();
 
+  video.addEventListener('timeupdate', () => {
+    if (video.duration && video.currentTime > video.duration - 0.15) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+  });
+
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) { running = false; start(); }
   });
