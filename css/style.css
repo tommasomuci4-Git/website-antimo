@@ -214,7 +214,7 @@ figure {
 /* NAV LATERALE */
 .nav-side {
   position: absolute;
-  top: var(--spacing-xs);
+  top: 0;
   left: var(--spacing-md);
   z-index: 10;
 }
@@ -259,7 +259,7 @@ figure {
 /* OPZIONE A — Logo nel nav in alto a sinistra */
 .nav-side__logo-link {
   display: block;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0;
   margin-left: -1.8rem;
 }
 
@@ -1747,12 +1747,12 @@ figure {
   }
 
   .nav-side {
-    top: var(--spacing-xs);
+    top: 0;
     left: var(--spacing-sm);
   }
 
   .nav-side__logo-link {
-    margin-bottom: 0.1rem;
+    margin-bottom: 0;
   }
 
   .nav-side a {
@@ -1780,11 +1780,6 @@ figure {
     height: 24px;
   }
 
-  .social-link[aria-label="Instagram"] { color: #833ab4; }
-  .social-link[aria-label="TikTok"]    { color: #ee1d52; }
-  .social-link[aria-label="WhatsApp"]  { color: #25d366; }
-  .social-link[aria-label="Vinted"]    { color: #09b1ba; }
-  .social-link[aria-label="Email"]     { color: #f5c518; }
 
   .lightbox {
     padding: 0.75rem;
