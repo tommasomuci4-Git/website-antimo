@@ -682,7 +682,9 @@ loadBanner();
   canvas.height = SIZE;
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
+  let running = false;
   function processFrame() {
+    if (video.readyState < 2) { requestAnimationFrame(processFrame); return; }
     ctx.drawImage(video, 0, 0, SIZE, SIZE);
     const img  = ctx.getImageData(0, 0, SIZE, SIZE);
     const data = img.data;
@@ -694,11 +696,19 @@ loadBanner();
     requestAnimationFrame(processFrame);
   }
 
-  video.addEventListener('play', processFrame);
-  if (!video.paused) processFrame();
+  function start() {
+    if (running) return;
+    running = true;
+    video.play().catch(() => {});
+    processFrame();
+  }
+
+  video.addEventListener('canplay', start);
+  video.addEventListener('play', start);
+  if (video.readyState >= 2) start();
 
   document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && video.paused) video.play();
+    if (!document.hidden) { running = false; start(); }
   });
 })();
 
