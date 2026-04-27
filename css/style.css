@@ -445,8 +445,9 @@ figure {
    AUTENTICITÀ — TRUST BAR
    ============================================= */
 .autenticita {
-  padding: 6rem var(--spacing-md);
+  padding: 2rem var(--spacing-md) 3rem;
   margin: 0;
+  border-top: 1px solid var(--color-accent);
 }
 
 .autenticita__inner {
