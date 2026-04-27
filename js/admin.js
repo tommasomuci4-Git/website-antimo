@@ -226,15 +226,43 @@ function renderAdminProduct(product) {
 // =============================================
 //  EDIT MODAL
 // =============================================
-const editModal     = document.getElementById('edit-modal');
-const editForm      = document.getElementById('edit-form');
+const editModal      = document.getElementById('edit-modal');
+const editForm       = document.getElementById('edit-form');
 const editModalClose = document.getElementById('edit-modal-close');
-const editCancel    = document.getElementById('edit-cancel');
-const editSaveBtn   = document.getElementById('edit-save-btn');
-const editSizeInput = document.getElementById('edit-sizes-input');
-const editSizesTags = document.getElementById('edit-sizes-tags');
+const editCancel     = document.getElementById('edit-cancel');
+const editSaveBtn    = document.getElementById('edit-save-btn');
+const editSizeInput  = document.getElementById('edit-sizes-input');
+const editSizesTags  = document.getElementById('edit-sizes-tags');
+const editCurrentPhotos = document.getElementById('edit-current-photos');
+const editImagesInput   = document.getElementById('edit-images-input');
+const editNewPreview    = document.getElementById('edit-new-preview');
 
 let editSizes = [];
+let editPhotosToKeep = [];
+
+function renderEditCurrentPhotos() {
+  editCurrentPhotos.innerHTML = '';
+  editPhotosToKeep.forEach((url, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'edit-photo-wrap';
+    wrap.innerHTML = `<img src="${url}" alt="foto ${i+1}"><button type="button">✕</button>`;
+    wrap.querySelector('button').addEventListener('click', () => {
+      editPhotosToKeep.splice(i, 1);
+      renderEditCurrentPhotos();
+    });
+    editCurrentPhotos.appendChild(wrap);
+  });
+}
+
+editImagesInput.addEventListener('change', () => {
+  editNewPreview.innerHTML = '';
+  Array.from(editImagesInput.files).forEach(file => {
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.className = 'preview-img';
+    editNewPreview.appendChild(img);
+  });
+});
 
 function openEditModal(product, rowEl) {
   document.getElementById('edit-id').value    = product.id;
@@ -244,6 +272,11 @@ function openEditModal(product, rowEl) {
 
   editSizes = parseSizes(product.size);
   rebuildEditTags();
+
+  editPhotosToKeep = Array.isArray(product.images) ? [...product.images] : [];
+  renderEditCurrentPhotos();
+  editImagesInput.value = '';
+  editNewPreview.innerHTML = '';
 
   editModal.style.display = 'flex';
   editModal._rowEl = rowEl;
@@ -278,31 +311,47 @@ editForm.addEventListener('submit', async (e) => {
   editSaveBtn.disabled = true;
   editSaveBtn.textContent = 'Saving…';
 
-  const id    = document.getElementById('edit-id').value;
-  const name  = document.getElementById('edit-name').value.trim();
-  const price = document.getElementById('edit-price').value.trim();
-  const brand = document.getElementById('edit-brand').value.trim();
+  const id      = document.getElementById('edit-id').value;
+  const name    = document.getElementById('edit-name').value.trim();
+  const price   = document.getElementById('edit-price').value.trim();
+  const brand   = document.getElementById('edit-brand').value.trim();
   const sizeVal = editSizes.length === 1 ? editSizes[0] : JSON.stringify(editSizes);
 
-  const { error } = await db
-    .from('products')
-    .update({ name, price, brand, size: sizeVal })
-    .eq('id', id);
+  try {
+    const newFiles = Array.from(editImagesInput.files);
+    const newUrls  = [];
 
-  if (error) {
-    console.error(error);
-    alert('Error saving changes: ' + error.message);
-  } else {
+    for (const file of newFiles) {
+      const ext  = file.name.split('.').pop().toLowerCase();
+      const path = `${id}/${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
+      const { error: uploadError } = await db.storage
+        .from('product-images')
+        .upload(path, file, { cacheControl: '3600' });
+      if (uploadError) throw uploadError;
+      const { data: urlData } = db.storage.from('product-images').getPublicUrl(path);
+      newUrls.push(urlData.publicUrl);
+    }
+
+    const images = [...editPhotosToKeep, ...newUrls];
+
+    const { error } = await db
+      .from('products')
+      .update({ name, price, brand, size: sizeVal, images })
+      .eq('id', id);
+
+    if (error) throw error;
+
     editModal.style.display = 'none';
-    // Aggiorna la riga nell'admin senza ricaricare tutto
     const row = editModal._rowEl;
+    row.querySelector('.admin-product__img').src = images[0] || '';
     row.querySelector('.admin-product__name').textContent = name;
     row.querySelector('.admin-product__meta').textContent =
       `${brand || '—'} · ${price || '—'} · ${editSizes.join(', ') || '—'}`;
-    editModal._product.name  = name;
-    editModal._product.price = price;
-    editModal._product.brand = brand;
-    editModal._product.size  = sizeVal;
+    editModal._product = { ...editModal._product, name, price, brand, size: sizeVal, images };
+
+  } catch (err) {
+    console.error(err);
+    alert('Error saving changes: ' + err.message);
   }
 
   editSaveBtn.disabled = false;
