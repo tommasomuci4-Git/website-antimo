@@ -214,7 +214,7 @@ figure {
 /* NAV LATERALE */
 .nav-side {
   position: absolute;
-  top: var(--spacing-md);
+  top: var(--spacing-xs);
   left: var(--spacing-md);
   z-index: 10;
 }
