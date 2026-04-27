@@ -686,35 +686,40 @@ loadBanner();
 
   const scene = new THREE.Scene();
 
-  const s = 1.25;
-  const camera = new THREE.OrthographicCamera(-s, s, s, -s, 0.1, 10);
-  camera.position.set(0, 0, 5);
+  // Prospettica per effetto 3D reale
+  const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 10);
+  camera.position.set(0, 0.5, 4);
   camera.lookAt(0, 0, 0);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.65));
-  const sun = new THREE.DirectionalLight(0xffffff, 0.85);
-  sun.position.set(1, 2, 4);
+  // Luci bilanciate
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const sun = new THREE.DirectionalLight(0xffffff, 1.0);
+  sun.position.set(2, 3, 4);
   scene.add(sun);
-  const fill = new THREE.DirectionalLight(0x6b9bff, 0.35);
-  fill.position.set(-1, -1, 2);
-  scene.add(fill);
+  const rim = new THREE.DirectionalLight(0x6b9bff, 0.5);
+  rim.position.set(-2, -1, 2);
+  scene.add(rim);
 
+  // Texture logo sulla faccia
   const tex = new THREE.TextureLoader().load('images/logo-transparent.svg');
   tex.center.set(0.5, 0.5);
   tex.rotation = -Math.PI / 2;
 
-  const faceMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.2, roughness: 0.45 });
-  const edgeMat = new THREE.MeshStandardMaterial({ color: 0x0052ff, metalness: 0.7, roughness: 0.3 });
+  const faceMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.15, roughness: 0.4 });
+  const edgeMat = new THREE.MeshStandardMaterial({ color: 0x0052ff, metalness: 0.8, roughness: 0.25 });
 
-  const geo  = new THREE.CylinderGeometry(1, 1, 0.12, 64);
+  // Moneta più spessa per visibilità del bordo
+  const geo  = new THREE.CylinderGeometry(1, 1, 0.28, 64);
   const coin = new THREE.Mesh(geo, [edgeMat, faceMat, faceMat]);
-  coin.rotation.x = Math.PI / 2;
+
+  // Tilt fisso sull'asse X — mostra sempre il bordo blu 3D
+  coin.rotation.x = Math.PI / 2 + 0.28;
   scene.add(coin);
 
   let raf;
   function animate() {
     raf = requestAnimationFrame(animate);
-    coin.rotation.y += 0.018;
+    coin.rotation.y += 0.022;
     renderer.render(scene, camera);
   }
   animate();
