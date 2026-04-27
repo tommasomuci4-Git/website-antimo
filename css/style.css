@@ -2521,6 +2521,12 @@ figure {
   padding-right: 2rem;
 }
 
+.sourcing-banner {
+  padding: 4rem 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 /* =============================================
    SU RICHIESTA
    ============================================= */
