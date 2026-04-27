@@ -685,6 +685,9 @@ loadBanner();
   let running = false;
   function processFrame() {
     if (video.readyState < 2) { requestAnimationFrame(processFrame); return; }
+    if (video.duration && video.currentTime > video.duration - 0.3) {
+      video.currentTime = 0;
+    }
     ctx.drawImage(video, 0, 0, SIZE, SIZE);
     const img  = ctx.getImageData(0, 0, SIZE, SIZE);
     const data = img.data;
@@ -706,19 +709,8 @@ loadBanner();
 
   video.addEventListener('canplay', start);
   video.addEventListener('play', start);
+  video.addEventListener('ended', () => { video.currentTime = 0; video.play().catch(() => {}); });
   if (video.readyState >= 2) start();
-
-  video.addEventListener('timeupdate', () => {
-    if (video.duration && video.currentTime > video.duration - 0.4) {
-      video.currentTime = 0;
-      video.play().catch(() => {});
-    }
-  });
-
-  video.addEventListener('ended', () => {
-    video.currentTime = 0;
-    video.play().catch(() => {});
-  });
 
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) { running = false; start(); }
