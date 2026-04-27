@@ -167,6 +167,10 @@ figure {
   mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
 }
 
+.hero__video-bg {
+  display: none;
+}
+
 .hero__video {
   position: absolute;
   inset: 0;
@@ -174,6 +178,29 @@ figure {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .hero__video-bg {
+    display: block;
+    position: absolute;
+    inset: -5%;
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    filter: blur(24px) brightness(0.35);
+    z-index: 0;
+  }
+
+  .hero__video {
+    inset: unset;
+    width: auto;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: contain;
+    z-index: 1;
+  }
 }
 
 .hero::before {
