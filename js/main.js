@@ -669,3 +669,59 @@ updateCartUI();
 loadProducts();
 loadBanner();
 
+// =============================================
+//  COIN LOGO — Three.js
+// =============================================
+(function initCoinLogo() {
+  if (typeof THREE === 'undefined') return;
+  const canvas = document.getElementById('coin-canvas');
+  if (!canvas) return;
+
+  const W = canvas.offsetWidth  || 96;
+  const H = canvas.offsetHeight || 96;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W, H);
+
+  const scene = new THREE.Scene();
+
+  const s = 1.25;
+  const camera = new THREE.OrthographicCamera(-s, s, s, -s, 0.1, 10);
+  camera.position.set(0, 0, 5);
+  camera.lookAt(0, 0, 0);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.65));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.85);
+  sun.position.set(1, 2, 4);
+  scene.add(sun);
+  const fill = new THREE.DirectionalLight(0x6b9bff, 0.35);
+  fill.position.set(-1, -1, 2);
+  scene.add(fill);
+
+  const tex = new THREE.TextureLoader().load('images/logo-transparent.svg');
+  tex.center.set(0.5, 0.5);
+  tex.rotation = -Math.PI / 2;
+
+  const faceMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.2, roughness: 0.45 });
+  const edgeMat = new THREE.MeshStandardMaterial({ color: 0x0052ff, metalness: 0.7, roughness: 0.3 });
+
+  const geo  = new THREE.CylinderGeometry(1, 1, 0.12, 64);
+  const coin = new THREE.Mesh(geo, [edgeMat, faceMat, faceMat]);
+  coin.rotation.x = Math.PI / 2;
+  scene.add(coin);
+
+  let raf;
+  function animate() {
+    raf = requestAnimationFrame(animate);
+    coin.rotation.y += 0.018;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(raf);
+    else animate();
+  });
+})();
+
