@@ -2680,23 +2680,14 @@ figure {
 
 .perche__title {
   font-family: var(--font-heading-family);
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  letter-spacing: 0.04em;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-white);
-  position: relative;
+  line-height: 1;
   display: inline-block;
-  padding-bottom: 0.5rem;
-}
-
-.perche__title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.4rem;
 }
 
 .perche__subtitle {
