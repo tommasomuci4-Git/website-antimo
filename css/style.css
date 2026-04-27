@@ -1746,8 +1746,12 @@ figure {
   }
 
   .nav-side {
-    top: var(--spacing-sm);
+    top: var(--spacing-xs);
     left: var(--spacing-sm);
+  }
+
+  .nav-side__logo-link {
+    margin-bottom: 0.1rem;
   }
 
   .nav-side a {
