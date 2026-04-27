@@ -128,7 +128,7 @@ figure {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #fff;
-  animation: bannerScroll 32s linear infinite;
+  animation: bannerScroll 20s linear infinite;
   padding-right: 2rem;
 }
 
