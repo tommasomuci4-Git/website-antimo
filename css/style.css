@@ -803,7 +803,7 @@ figure {
   outline: none;
 }
 
-.social-link[aria-label="Instagram"]:hover { color: #e1306c; }
+.social-link[aria-label="Instagram"]:hover { color: #833ab4; }
 .social-link[aria-label="TikTok"]:hover   { color: #ee1d52; }
 .social-link[aria-label="WhatsApp"]:hover { color: #25d366; }
 .social-link[aria-label="Vinted"]:hover   { color: #09b1ba; }
