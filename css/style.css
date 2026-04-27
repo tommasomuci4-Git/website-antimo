@@ -264,8 +264,9 @@ figure {
 
 .nav-side__logo-canvas {
   display: block;
-  width: clamp(72px, 10vw, 96px);
-  height: clamp(72px, 10vw, 96px);
+  width: clamp(100px, 13vw, 140px);
+  height: clamp(100px, 13vw, 140px);
+  aspect-ratio: 1 / 1;
 }
 
 /* OPZIONE B — Watermark in basso a sinistra */
