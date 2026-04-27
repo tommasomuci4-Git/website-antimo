@@ -322,7 +322,7 @@ const animSelectors = [
   '.perche__header',
   '.perche__item',
   '.perche__sourcing',
-  '.social-feed__title',
+  '.social-feed__header',
   '.social-feed__item',
   '.recensioni__header',
   '.rec-card',
