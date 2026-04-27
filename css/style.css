@@ -1780,6 +1780,12 @@ figure {
     height: 24px;
   }
 
+  .social-link[aria-label="Instagram"] { color: #833ab4; }
+  .social-link[aria-label="TikTok"]    { color: #ee1d52; }
+  .social-link[aria-label="WhatsApp"]  { color: #25d366; }
+  .social-link[aria-label="Vinted"]    { color: #09b1ba; }
+  .social-link[aria-label="Email"]     { color: #f5c518; }
+
   .lightbox {
     padding: 0.75rem;
     align-items: center;
