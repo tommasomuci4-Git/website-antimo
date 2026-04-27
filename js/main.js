@@ -670,56 +670,46 @@ loadProducts();
 loadBanner();
 
 // =============================================
-//  COIN LOGO — Three.js
+//  COIN LOGO — chroma key video
 // =============================================
-(function initCoinLogo() {
-  if (typeof THREE === 'undefined') return;
-  const canvas = document.getElementById('coin-canvas');
-  if (!canvas) return;
+(function initLogoChromaKey() {
+  const video  = document.getElementById('logo-video');
+  const canvas = document.getElementById('logo-canvas');
+  if (!video || !canvas) return;
 
-  const W = canvas.offsetWidth  || 96;
-  const H = canvas.offsetHeight || 96;
+  const SIZE = 256;
+  canvas.width  = SIZE;
+  canvas.height = SIZE;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(W, H);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 10);
-  camera.position.set(0, 0.5, 4);
-  camera.lookAt(0, 0, 0);
-
-  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-  const sun = new THREE.DirectionalLight(0xffffff, 1.0);
-  sun.position.set(2, 3, 4);
-  scene.add(sun);
-  const rim = new THREE.DirectionalLight(0x6b9bff, 0.5);
-  rim.position.set(-2, -1, 2);
-  scene.add(rim);
-
-  const tex = new THREE.TextureLoader().load('images/logo-transparent.svg');
-  tex.center.set(0.5, 0.5);
-  tex.rotation = -Math.PI / 2;
-
-  const faceMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.15, roughness: 0.4 });
-  const edgeMat = new THREE.MeshStandardMaterial({ color: 0x0052ff, metalness: 0.8, roughness: 0.25 });
-
-  const geo  = new THREE.CylinderGeometry(1, 1, 0.28, 64);
-  const coin = new THREE.Mesh(geo, [edgeMat, faceMat, faceMat]);
-  coin.rotation.x = Math.PI / 2 + 0.28;
-  scene.add(coin);
-
-  let raf;
-  function animate() {
-    raf = requestAnimationFrame(animate);
-    coin.rotation.y += 0.04;
-    renderer.render(scene, camera);
+  let running = false;
+  function processFrame() {
+    if (video.readyState < 2 || video.seeking) { requestAnimationFrame(processFrame); return; }
+    ctx.drawImage(video, 0, 0, SIZE, SIZE);
+    const img  = ctx.getImageData(0, 0, SIZE, SIZE);
+    const data = img.data;
+    for (let i = 0; i < data.length; i += 4) {
+      const r = data[i], g = data[i + 1], b = data[i + 2];
+      if (r < 25 && g < 25 && b < 25) data[i + 3] = 0;
+    }
+    ctx.putImageData(img, 0, 0);
+    requestAnimationFrame(processFrame);
   }
-  animate();
+
+  function start() {
+    if (running) return;
+    running = true;
+    video.playbackRate = 2.5;
+    video.play().catch(() => {});
+    processFrame();
+  }
+
+  video.addEventListener('canplay', start);
+  video.addEventListener('play', start);
+  if (video.readyState >= 2) start();
 
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) cancelAnimationFrame(raf);
-    else animate();
+    if (!document.hidden) { running = false; start(); }
   });
 })();
 
