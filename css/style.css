@@ -2842,7 +2842,7 @@ figure {
    CHI SIAMO
    ============================================= */
 .chi-siamo {
-  padding: 6rem 1.5rem 6rem;
+  padding: 6rem 1.5rem 2rem;
 }
 
 .chi-siamo__inner {
@@ -2946,7 +2946,7 @@ figure {
    SOCIAL FEED
    ============================================= */
 .social-feed {
-  padding: 6rem 80px;
+  padding: 2rem 80px 6rem;
   background: transparent;
 }
 
