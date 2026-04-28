@@ -22,11 +22,23 @@
     <button class="drop-banner__close" id="drop-banner-close" aria-label="Close banner">✕</button>
   </div>
 
+  <script>
+    (function() {
+      const isMobile = window.innerWidth <= 768;
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('[data-src-desktop]').forEach(function(el) {
+          el.src = isMobile ? el.dataset.srcMobile : el.dataset.srcDesktop;
+        });
+      });
+    })();
+  </script>
+
   <!-- ===================== HERO VIDEO ===================== -->
   <section class="hero" id="home">
     <video
       class="hero__video-bg"
-      src="images/hero-video4.mp4"
+      data-src-desktop="images/hero-video.mp4"
+      data-src-mobile="images/hero-video4.mp4"
       autoplay
       muted
       loop
@@ -35,7 +47,8 @@
     </video>
     <video
       class="hero__video"
-      src="images/hero-video4.mp4"
+      data-src-desktop="images/hero-video.mp4"
+      data-src-mobile="images/hero-video4.mp4"
       autoplay
       muted
       loop
