@@ -25,6 +25,15 @@
   <!-- ===================== HERO VIDEO ===================== -->
   <section class="hero" id="home">
     <video
+      class="hero__video-bg"
+      src="images/hero-video4.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      aria-hidden="true">
+    </video>
+    <video
       class="hero__video"
       src="images/hero-video4.mp4"
       autoplay
@@ -36,7 +45,10 @@
 
     <nav class="nav-side" aria-label="Main navigation">
       <a href="#" class="nav-side__logo-link" aria-label="OrigineResell home" id="logo-link">
-        <img src="images/logo-transparent.svg" class="nav-side__logo-canvas" alt="OrigineResell logo" width="96" height="96">
+        <video id="logo-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none">
+          <source src="images/logo-3d.mp4" type="video/mp4">
+        </video>
+        <canvas id="logo-canvas" class="nav-side__logo-canvas" aria-hidden="true"></canvas>
       </a>
       <ul>
         <li><a href="#catalogo" id="nav-catalog">CATALOG</a></li>
@@ -427,6 +439,12 @@
           <path d="M3 3h4.5l3.5 9.5L14.5 3H19l-6 18h-4L3 3z"/>
         </svg>
       </a>
+      <a href="mailto:origineresell@gmail.com" class="social-link" aria-label="Email">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="M2 7l10 7 10-7"/>
+        </svg>
+      </a>
     </div>
     <p class="footer__copy">&copy; 2026 OrigineResell. All rights reserved.</p>
   </footer>
@@ -533,3 +551,4 @@
 <script src="js/main.js" defer></script>
 </body>
 </html>
+
