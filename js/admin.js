@@ -123,9 +123,9 @@ function buildSizeTags(container, sizes, onRemove) {
 
 function setupSizeInput(inputEl, tagsContainer, sizesArray) {
   inputEl.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ',') {
+    if (e.key === 'Enter') {
       e.preventDefault();
-      const val = inputEl.value.trim().replace(/,$/, '');
+      const val = inputEl.value.trim();
       if (val && !sizesArray.includes(val)) {
         sizesArray.push(val);
         buildSizeTags(tagsContainer, sizesArray, (i) => {
@@ -258,9 +258,9 @@ function rebuildEditTags() {
 }
 
 editSizeInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ',') {
+  if (e.key === 'Enter') {
     e.preventDefault();
-    const val = editSizeInput.value.trim().replace(/,$/, '');
+    const val = editSizeInput.value.trim();
     if (val && !editSizes.includes(val)) {
       editSizes.push(val);
       rebuildEditTags();
@@ -324,9 +324,9 @@ function rebuildAddTags() {
 }
 
 addSizeInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ',') {
+  if (e.key === 'Enter') {
     e.preventDefault();
-    const val = addSizeInput.value.trim().replace(/,$/, '');
+    const val = addSizeInput.value.trim();
     if (val && !addSizes.includes(val)) {
       addSizes.push(val);
       rebuildAddTags();
