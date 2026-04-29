@@ -315,7 +315,9 @@ editForm.addEventListener('submit', async (e) => {
   const name    = document.getElementById('edit-name').value.trim();
   const price   = document.getElementById('edit-price').value.trim();
   const brand   = document.getElementById('edit-brand').value.trim();
-  const sizeVal = editSizes.length === 1 ? editSizes[0] : JSON.stringify(editSizes);
+  const lastTyped = editSizeInput.value.trim();
+  if (lastTyped && !editSizes.includes(lastTyped)) editSizes.push(lastTyped);
+  const sizeVal = editSizes.length === 1 ? editSizes[0] : editSizes.length > 1 ? JSON.stringify(editSizes) : '';
 
   try {
     const newFiles = Array.from(editImagesInput.files);
